@@ -2,8 +2,7 @@ import { useState } from "react";
 import type { StudyFormProps } from "../types/study.ts";
 
 export default function StudyForm({
-  addRecord,
-  handleAddStudy,
+  addRecord
 }: StudyFormProps) {
   const [subject, setSubject] = useState<string>("");
 
@@ -13,7 +12,7 @@ export default function StudyForm({
       <button
         onClick={() => {
           addRecord(subject);
-          handleAddStudy(subject);
+          // handleAddStudy(subject);
         }}
       >
         追加

@@ -14,22 +14,22 @@ function App() {
     localStorage.setItem("studyRecords", JSON.stringify(studyRecords));
   }, [studyRecords]);
 
-  const handleAddStudy = async(subject: string) =>{
-    if (!subject.trim()) return;
+  // const handleAddStudy = async(subject: string) =>{
+  //   if (!subject.trim()) return;
 
-    const response = await fetch('http://localhost:3000/api/study', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        subject: subject,
-        completed: false
-      })
-    })
-    const data = await response.json()
-    console.log(data)
-  }
+  //   const response = await fetch('http://localhost:3000/api/study', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       subject: subject,
+  //       completed: false
+  //     })
+  //   })
+  //   const data = await response.json()
+  //   console.log(data)
+  // }
 
   const addRecord = (subject: string) => {
     if (!subject.trim()) return;
@@ -52,16 +52,24 @@ function App() {
     );
   };
 
-  useEffect(()=>{
-    fetch("http://localhost:3000/api/study")
-    .then(res=>res.text())
-    .then(data=>console.log(data))
-  })
+  // useEffect(()=>{
+  //   fetch("http://localhost:3000/api/study")
+  //   .then(res=>res.text())
+  //   .then(data=>console.log(data))
+  // })
+
+  // useEffect(()=>{
+  //   fetch("http://localhost:3000/api/study")
+  //   .then(res=>res.json())
+  //   .then(data=>{setStudyRecords(data)
+  //     console.log(data)
+  //   })
+  // },[])
 
   return (
     <>
       <div>
-        <StudyForm addRecord={addRecord} handleAddStudy={handleAddStudy} />
+        <StudyForm addRecord={addRecord} />
         <StudyList studyRecords={studyRecords} deleteRecord={deleteRecord} updateRecord={updateRecord}/>
       </div>
     </>
