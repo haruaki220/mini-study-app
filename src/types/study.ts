@@ -4,8 +4,8 @@ export type StudyRecord = {
 };
 
 export type StudyFormProps = {
+  // addRecord: (subject: string) => void;
   addRecord: (subject: string) => void;
-  // handleAddStudy: (subject: string) => void;
 };
 
 export type StudyListProps = {

@@ -5,72 +5,65 @@ import StudyList from "./components/StudyList.tsx";
 import type { StudyRecord } from "./types/study.ts";
 
 function App() {
-  const [studyRecords, setStudyRecords] = useState<StudyRecord[]>(() => {
-    const saved = localStorage.getItem("studyRecords");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [studyRecords, setStudyRecords] = useState<StudyRecord[]>([]);
 
-  useEffect(() => {
-    localStorage.setItem("studyRecords", JSON.stringify(studyRecords));
-  }, [studyRecords]);
-
-  // const handleAddStudy = async(subject: string) =>{
-  //   if (!subject.trim()) return;
-
-  //   const response = await fetch('http://localhost:3000/api/study', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       subject: subject,
-  //       completed: false
-  //     })
-  //   })
-  //   const data = await response.json()
-  //   console.log(data)
-  // }
-
-  const addRecord = (subject: string) => {
+  const addRecord = async (subject: string) => {
     if (!subject.trim()) return;
-    const newRecord = {
-      id: crypto.randomUUID(),
-      subject: subject,
-    };
-    setStudyRecords((prev) => [...prev, newRecord]);
+
+    const response = await fetch("http://localhost:3000/api/study", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: crypto.randomUUID(),
+        subject: subject,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+    fetchRecords();
   };
 
-  const deleteRecord = (id: string) => {
-    setStudyRecords((prev) => prev.filter((record) => record.id !== id));
+  const deleteRecord = async (id: string) => {
+    const response = await fetch(`http://localhost:3000/api/study/${id}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    console.log(data);
+    fetchRecords();
   };
 
-  const updateRecord = (id: string, editedSubject: string) => {
-    setStudyRecords((prev) =>
-      prev.map((record) =>
-        record.id === id ? { ...record, subject: editedSubject } : record,
-      ),
-    );
+  const updateRecord = async (id: string, editedSubject: string) => {
+    const response = await fetch(`http://localhost:3000/api/study/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ subject: editedSubject }),
+    });
+    const data = response.json();
+    console.log(data);
+    fetchRecords();
   };
 
-  // useEffect(()=>{
-  //   fetch("http://localhost:3000/api/study")
-  //   .then(res=>res.text())
-  //   .then(data=>console.log(data))
-  // })
+  const fetchRecords = () => {
+    fetch("http://localhost:3000/api/study")
+      .then((res) => res.json())
+      .then((data) => setStudyRecords(data));
+  };
 
-  // useEffect(()=>{
-  //   fetch("http://localhost:3000/api/study")
-  //   .then(res=>res.json())
-  //   .then(data=>{setStudyRecords(data)
-  //     console.log(data)
-  //   })
-  // },[])
+  useEffect(fetchRecords, []);
 
   return (
     <>
       <div>
         <StudyForm addRecord={addRecord} />
-        <StudyList studyRecords={studyRecords} deleteRecord={deleteRecord} updateRecord={updateRecord}/>
+        <StudyList
+          studyRecords={studyRecords}
+          deleteRecord={deleteRecord}
+          updateRecord={updateRecord}
+        />
       </div>
     </>
   );
