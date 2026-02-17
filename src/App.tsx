@@ -7,9 +7,13 @@ import type { StudyRecord } from "./types/study.ts";
 function App() {
   const [studyRecords, setStudyRecords] = useState<StudyRecord[]>([]);
 
-  const addRecord = async (subject: string) => {
+  const addRecord = async (
+    subject: string,
+    minutes: number | "",
+    memo: string,
+  ) => {
     if (!subject.trim()) return;
-
+    if (minutes === "") return;
     const response = await fetch("http://localhost:3000/api/study", {
       method: "POST",
       headers: {
@@ -18,6 +22,8 @@ function App() {
       body: JSON.stringify({
         id: crypto.randomUUID(),
         subject: subject,
+        minutes: minutes,
+        memo: memo,
       }),
     });
     const data = await response.json();
@@ -34,15 +40,25 @@ function App() {
     fetchRecords();
   };
 
-  const updateRecord = async (id: string, editedSubject: string) => {
+  const updateRecord = async (
+    id: string,
+    editSubject: string,
+    editMinutes: number | "",
+    editMemo: string,
+  ) => {
+    if (editMinutes === "")return;
     const response = await fetch(`http://localhost:3000/api/study/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ subject: editedSubject }),
+      body: JSON.stringify({
+        subject: editSubject,
+        minutes: editMinutes,
+        memo: editMemo,
+      }),
     });
-    const data = response.json();
+    const data = await response.json();
     console.log(data);
     fetchRecords();
   };
