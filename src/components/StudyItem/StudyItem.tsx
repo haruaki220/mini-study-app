@@ -13,6 +13,12 @@ export default function StudyItem({
   const [editMinutes, setEditMinutes] = useState<number | "">(0);
   const [editMemo, setEditMemo] = useState<string>("");
 
+  const alignCreatedAt = (created_at:string) => {
+    created_at=created_at.slice(0,10);
+    created_at=created_at.replaceAll("-","/");
+    return created_at;
+  }
+
   return (
     <li className={styles.studyItem}>
       {isEditing ? (
@@ -84,7 +90,7 @@ export default function StudyItem({
         </>
       ) : (
         <>
-          <div className={styles.row1}>
+          <div className={styles.row}>
             <p className={styles.title}>{record.subject}</p>
             <div className={styles.buttonSection}>
               <Button
@@ -112,11 +118,12 @@ export default function StudyItem({
               </Button>
             </div>
           </div>
-          <div>
-            <span>時間：{record.minutes}</span>
+          <div className={`${styles.row} ${styles.row2}`}>
+            <p>{alignCreatedAt(record.created_at)}</p>
+            <p className={styles.minutes}>{record.minutes}分</p>
           </div>
-          <div>
-            <span>メモ：{record.memo}</span>
+          <div className={`${styles.row} ${styles.row3}`}>
+            <p className={styles.memo}>{record.memo}</p>
           </div>
           {/* <button
             onClick={() => {

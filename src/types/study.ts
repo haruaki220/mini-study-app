@@ -3,6 +3,7 @@ export type StudyRecord = {
   subject: string;
   minutes: number;
   memo: string;
+  created_at: string
 };
 
 export type StudyFormProps = {

@@ -90,6 +90,7 @@ function StudyApp() {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+    console.log(data);
     setStudyRecords(data);
   };
 

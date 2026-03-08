@@ -1,21 +1,43 @@
 .studyItem{
   background-color:#fff;
   border-radius:15px;
-  width:90%;
+  width:94%;
   max-width:400px;
   border:1px solid #E5E7EB;
   padding:15px;
 }
 
-.row1{
+.row{
   display:flex; 
   align-items: center;
   justify-content: space-between;
 }
 
+.row:not(:last-child){
+  margin-bottom:8px;
+}
+
 .title{
   font-size:23px;
-  margin:0;
+  font-weight:600;
+  margin-left:5px;
+}
+
+.row2{
+  border-bottom:1px solid #333333;
+  font-size:20px;
+}
+
+.minutes{
+  margin-right:70px;
+}
+
+.row3{
+  font-size:20px;
+}
+
+.memo{
+  text-align: left;
 }
 
 .buttonSection{
