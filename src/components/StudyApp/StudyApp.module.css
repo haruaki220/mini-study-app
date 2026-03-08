@@ -1,0 +1,28 @@
+.header{
+  box-sizing: border-box;
+  position:sticky;
+  top:0;
+  left:0;
+  width:100vw;
+  height:61px;
+  padding:0 20px;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  background-color:#fff;
+  border-bottom:1px solid #E5E7EB;
+}
+
+.headerTitle{
+  font-size:28px;
+  color:#1F2937;
+  margin:0;
+}
+
+.buttonNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100vw;
+  display:flex;
+}

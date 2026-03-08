@@ -1,6 +1,6 @@
 import "./App.css";
 import Auth from "./components/Auth.tsx";
-import StudyApp from "./components/StudyApp.tsx";
+import StudyApp from "./components/StudyApp/StudyApp.tsx";
 import { AuthProvider, useAuth } from "./context/AuthContext.tsx";
 
 function AppContent() {

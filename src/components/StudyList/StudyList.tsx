@@ -1,5 +1,6 @@
-import type { StudyListProps } from "../types/study.ts";
-import StudyItem from "./StudyItem";
+import type { StudyListProps } from "../../types/study.ts";
+import StudyItem from "../StudyItem/StudyItem";
+import styles from "./StudyList.module.css";
 
 export default function StudyList({
   studyRecords,
@@ -8,7 +9,7 @@ export default function StudyList({
 }: StudyListProps) {
   return (
     <>
-      <ul>
+      <ul className={styles.studyList}>
         {studyRecords.map((record) => (
           <StudyItem
             key={record.id}

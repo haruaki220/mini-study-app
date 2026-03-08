@@ -1,0 +1,24 @@
+.studyItem{
+  background-color:#fff;
+  border-radius:15px;
+  width:90%;
+  max-width:400px;
+  border:1px solid #E5E7EB;
+  padding:15px;
+}
+
+.row1{
+  display:flex; 
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title{
+  font-size:23px;
+  margin:0;
+}
+
+.buttonSection{
+  display:flex;
+  gap:10px;
+}
