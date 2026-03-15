@@ -32,6 +32,10 @@ export type StudyItemProps = {
   ) => void;
 };
 
+export type AuthProps = {
+  setMode: () => void;
+}
+
 export type ButtonProps = {
   variant: "primary" | "secondary" | "danger" | "ghost" | "nav";
   type: "button" | "submit" | "reset" | undefined;

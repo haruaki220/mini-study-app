@@ -3,9 +3,12 @@
   /* display:flex;
   flex-direction:column; */
   /* padding: 35px 30px; */
-  width: 80%;
+
+  /* width: 80%;
   max-width: 500px;
-  margin: 20px auto;
+  margin: 20px auto; */
+
+  padding: 20px 40px;
 }
 
 .row {
@@ -13,6 +16,7 @@
   align-items:center;
   justify-content: center; */
   margin-bottom: 20px;
+  /* width:100%; */
 }
 
 .inputArea {

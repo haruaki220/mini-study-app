@@ -3,8 +3,9 @@ import { supabase } from "../../lib/supabase.ts";
 import Button from "../Button/Button.tsx";
 import Input from "../Input/Input.tsx";
 import styles from "./AccountAuth.module.css";
+import type {AuthProps} from "../../types/study.ts";
 
-export default function Login() {
+export default function Login({setMode}:AuthProps) {
   const [mailInput, setMailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -45,6 +46,7 @@ export default function Login() {
 
   return (
     <>
+      <h2 className={styles.welcome}>学習記録アプリ</h2>
       <h3 className={styles.modeName}>サインアップ</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
@@ -85,9 +87,19 @@ export default function Login() {
         <Button variant="primary" type="submit" size="lg" disabled={loading}>
           {loading ? "サインアップ中" : "サインアップ"}
         </Button>
-      </form>
-      {message && <div>{message}</div>}
+        {message && <div>{message}</div>}
       {error && <div>{error}</div>}
+      </form>
+      <h4>すでにアカウントをお持ちの方はこちら</h4>
+      <Button
+          variant="secondary"
+          type="button"
+          size="lg"
+          disabled={false}
+          onClick={setMode}
+        >
+          ログイン
+        </Button>
     </>
   );
 }
