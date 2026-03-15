@@ -1,5 +1,5 @@
 import "./App.css";
-import Auth from "./components/Auth.tsx";
+import Auth from "./components/Auth/Auth.tsx";
 import StudyApp from "./components/StudyApp/StudyApp.tsx";
 import { AuthProvider, useAuth } from "./context/AuthContext.tsx";
 

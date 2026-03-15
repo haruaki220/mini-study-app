@@ -42,5 +42,33 @@
 
 .buttonSection{
   display:flex;
+  justify-content:center;
   gap:10px;
+}
+
+.editRow{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  margin-bottom:7px;
+  
+}
+
+.inputArea{
+  /* margin-left:5px; */
+  width:200px;
+  resize:none;
+  /* height:25px; */
+  font-size:18px;
+  box-sizing:border-box;
+  padding:5px;
+  /* border-width:3px; */
+}
+
+.label{
+  width:60px;
+  display:block;
+  /* height:50px; */
+  font-size:20px;
+  margin-right:5px;
 }

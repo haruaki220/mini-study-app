@@ -1,57 +1,59 @@
-.button{
+.button {
   text-align: center;
-  border:1px solid #374151;
+  border: 1px solid #374151;
 }
 
-.primary{
-  color:#fff;
-  background-color:#2563EB;
-  border-radius:12px;
+.primary {
+  color: #fff;
+  background-color: #2563eb;
+  border-radius: 12px;
 }
 
-.secondary{
-  color:#374151;
-  background-color:#E5E7EB;
-  border-radius:12px;
+.secondary {
+  color: #374151;
+  background-color: #e5e7eb;
+  border-radius: 12px;
 }
 
-.danger{
-  color:#fff;
-  background-color:#DC2626;
-  border-radius:12px;
+.danger {
+  color: #fff;
+  background-color: #dc2626;
+  border-radius: 12px;
 }
 
-.ghost{
-  color:#374151;
-  background-color:#F3F4F6;
-  border-radius:12px;
+.ghost {
+  color: #374151;
+  background-color: #f3f4f6;
+  border-radius: 12px;
 }
 
-.nav{
-  color:#FFFEF9;
-  background-color:#313743;
-  border:1px solid #c1c1c1;
-  font-weight:470;
-  padding:0;
+.nav {
+  color: #fffef9;
+  background-color: #313743;
+  border: 1px solid #c1c1c1;
+  font-weight: 470;
+  padding: 0;
 }
 
-.active{
-  background-color:#111827;
+.active {
+  background-color: #111827;
 }
 
 /* size */
-.sm{
-  font-size:17px;
-  width:85px;
-  padding:5px 0;
+.sm {
+  font-size: 17px;
+  width: 85px;
+  padding: 5px 0;
 }
 
-.md{
-  font-size:16px;
-  flex-grow:1;
-  height:65px;
+.md {
+  font-size: 16px;
+  flex-grow: 1;
+  height: 65px;
 }
 
-.lg{
-  padding:1em 1.2em;
+.lg {
+  font-size: 20px;
+  padding: 15px 0;
+  width: 240px;
 }

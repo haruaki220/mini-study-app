@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { supabase } from "../lib/supabase.ts";
+import { supabase } from "../../lib/supabase.ts";
+import Button from "../Button/Button.tsx";
+import Input from "../Input/Input.tsx";
+import styles from "./AccountAuth.module.css";
 
 export default function Login() {
   const [mailInput, setMailInput] = useState<string>("");
@@ -42,29 +45,49 @@ export default function Login() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <span>email:</span>
-          <input
+      <h3 className={styles.modeName}>サインアップ</h3>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.row}>
+          <p className={styles.label}>メールアドレス</p>
+          {/* <input
             type="email"
             value={mailInput}
             onChange={(e) => setMailInput(e.target.value)}
+          /> */}
+          <Input
+            tag="input"
+            type="email"
+            value={mailInput}
+            size="lg"
+            placeholder="メールアドレスを入力"
+            onChange={(e) => setMailInput(e.target.value)}
           />
         </div>
-        <div>
-          <span>password:</span>
-          <input
+        <div className={styles.row}>
+          <p className={styles.label}>パスワード</p>
+          {/* <input
             type="password"
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
+          /> */}
+          <Input
+            tag="input"
+            type="password"
+            value={passwordInput}
+            size="lg"
+            placeholder="パスワードを入力"
+            onChange={(e) => setPasswordInput(e.target.value)}
           />
         </div>
-        <button type="submit" disabled={loading}>
+        {/* <button type="submit" disabled={loading}>
           {loading ? "サインアップ中" : "サインアップ"}
-        </button>
+        </button> */}
+        <Button variant="primary" type="submit" size="lg" disabled={loading}>
+          {loading ? "サインアップ中" : "サインアップ"}
+        </Button>
       </form>
-      {message && <div><span>{message}</span></div>}
-      {error && <div><span>{error}</span></div>}
+      {message && <div>{message}</div>}
+      {error && <div>{error}</div>}
     </>
   );
 }

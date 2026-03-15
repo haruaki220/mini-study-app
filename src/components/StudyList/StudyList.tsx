@@ -1,5 +1,5 @@
 import type { StudyListProps } from "../../types/study.ts";
-import StudyItem from "../StudyItem/StudyItem";
+import StudyItem from "../StudyItem/StudyItem.tsx";
 import styles from "./StudyList.module.css";
 
 export default function StudyList({

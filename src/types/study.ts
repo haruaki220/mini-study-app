@@ -3,7 +3,7 @@ export type StudyRecord = {
   subject: string;
   minutes: number;
   memo: string;
-  created_at: string
+  created_at: string;
 };
 
 export type StudyFormProps = {
@@ -33,11 +33,26 @@ export type StudyItemProps = {
 };
 
 export type ButtonProps = {
-  variant:"primary"|"secondary"|"danger"|"ghost"|"nav";
-  type:"button"|"submit"|"reset"|undefined;
-  size:"sm"|"md"|"lg";
-  disabled:boolean;
+  variant: "primary" | "secondary" | "danger" | "ghost" | "nav";
+  type: "button" | "submit" | "reset" | undefined;
+  size: "sm" | "md" | "lg";
+  disabled: boolean;
   children: string;
-  active?:boolean;
+  active?: boolean;
   onClick?: () => void;
+};
+
+export type InputProps = {
+  tag: "input" | "textarea";
+  id?: string;
+  type?: "password" | "email" | "text" | "number";
+  value: string | number | "";
+  size: "sm" | "md" | "lg";
+  placeholder?: string;
+  min?: number;
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement, HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
+  ) => void;
 };

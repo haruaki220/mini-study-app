@@ -1,0 +1,89 @@
+import { useState } from "react";
+import { supabase } from "../../lib/supabase.ts";
+import Button from "../Button/Button.tsx";
+import Input from "../Input/Input.tsx";
+import styles from "./AccountAuth.module.css";
+
+export default function Login() {
+  const [mailInput, setMailInput] = useState<string>("");
+  const [passwordInput, setPasswordInput] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (mailInput === "" || passwordInput === "") {
+      setError("入力してください");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: mailInput,
+        password: passwordInput,
+      });
+
+      if (error) {
+        setError("メールアドレスまたはパスワードが違います");
+      }
+    } catch {
+      setError("通信エラーが発生しました");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <h3 className={styles.modeName}>ログイン</h3>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.row}>
+          <p className={styles.label}>メールアドレス</p>
+          {/* <input
+            type="email"
+            className={styles.inputArea}
+            value={mailInput}
+            placeholder="メールアドレスを入力"
+            onChange={(e) => setMailInput(e.target.value)}
+          /> */}
+          <Input
+            tag="input"
+            type="email"
+            value={mailInput}
+            size="lg"
+            placeholder="メールアドレスを入力"
+            onChange={(e) => setMailInput(e.target.value)}
+          />
+        </div>
+        <div className={styles.row}>
+          <p className={styles.label}>パスワード</p>
+          {/* <input
+            type="password"
+            className={styles.inputArea}
+            value={passwordInput}
+            placeholder="パスワードを入力"
+            onChange={(e) => setPasswordInput(e.target.value)}
+          /> */}
+          <Input
+            tag="input"
+            type="password"
+            value={passwordInput}
+            size="lg"
+            placeholder="パスワードを入力"
+            onChange={(e) => setPasswordInput(e.target.value)}
+          />
+        </div>
+        {/* <button type="submit" disabled={loading}>
+            {loading ? "ログイン中" : "ログイン"}
+          </button> */}
+        <Button variant="primary" type="submit" size="lg" disabled={loading}>
+          {loading ? "ログイン中" : "ログイン"}
+        </Button>
+      </form>
+      {error && <div>{error}</div>}
+    </>
+  );
+}

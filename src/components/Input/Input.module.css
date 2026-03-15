@@ -1,0 +1,22 @@
+.inputArea{
+  resize:none;
+  font-size:18px;
+  box-sizing:border-box;
+  padding:5px 7px;
+}
+
+/* .textarea{
+  height:101.33px;
+} */
+
+.sm{
+  width:120px;
+}
+
+.md{
+  width:200px;
+}
+
+.lg{
+  width:100%;
+}

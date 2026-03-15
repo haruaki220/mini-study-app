@@ -1,0 +1,12 @@
+.welcome {
+  font-size: 30px;
+  width: 220px;
+  margin: 0 auto;
+  padding: 60px 0 20px 0;
+  color: #1f2937;
+}
+
+.wrapper {
+  /* padding-bottom: 30px; */
+  height:100%;
+}

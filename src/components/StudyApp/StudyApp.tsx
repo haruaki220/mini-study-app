@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import styles from "./StudyApp.module.css";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { supabase } from "../../lib/supabase.ts";
 import type { StudyRecord } from "../../types/study.ts";
 import Button from "../Button/Button.tsx";
-import StudyForm from "../StudyForm.tsx";
+import StudyForm from "../StudyForm/StudyForm.tsx";
 import StudyList from "../StudyList/StudyList.tsx";
+import styles from "./StudyApp.module.css";
 
 function StudyApp() {
   const [studyRecords, setStudyRecords] = useState<StudyRecord[]>([]);
@@ -107,9 +107,21 @@ function StudyApp() {
   return (
     <>
       <div className={styles.header}>
-        {location === "studyForm" && <p className={styles.headerTitle}>記録追加</p>}
-        {location === "studyList" && <p className={styles.headerTitle}>記録リスト</p>}
-        <Button variant="danger" type="button" size="sm" disabled={false} onClick={handleLogout}>ログアウト</Button>
+        {location === "studyForm" && (
+          <p className={styles.headerTitle}>記録追加</p>
+        )}
+        {location === "studyList" && (
+          <p className={styles.headerTitle}>記録リスト</p>
+        )}
+        <Button
+          variant="danger"
+          type="button"
+          size="sm"
+          disabled={false}
+          onClick={handleLogout}
+        >
+          ログアウト
+        </Button>
         {/* <Button onClick={handleLogout}>ログアウト</Button> */}
       </div>
       {location === "studyForm" && <StudyForm addRecord={addRecord} />}

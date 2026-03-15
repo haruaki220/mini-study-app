@@ -1,0 +1,35 @@
+.modeName {
+  font-size: 24px;
+  margin:10px 0;
+}
+
+.form {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px 0;
+  border-bottom: 1px solid #1f2937;
+}
+
+.row {
+  margin-bottom: 40px;
+}
+
+.inputArea {
+  width: 100%;
+  resize: none;
+  font-size: 18px;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.label {
+  width: 140px;
+  /* height:50px; */
+  font-size: 16px;
+  /* border-left: 5px solid #111827; */
+  margin-bottom: 15px;
+  color: #374151;
+  font-weight: 500;
+  text-align: left;
+}
