@@ -34,7 +34,7 @@ export type StudyItemProps = {
 
 export type AuthProps = {
   setMode: () => void;
-}
+};
 
 export type ButtonProps = {
   variant: "primary" | "secondary" | "danger" | "ghost" | "nav";
@@ -60,3 +60,43 @@ export type InputProps = {
       | React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
   ) => void;
 };
+
+export type SummaryItem = {
+  start_date: string;
+  total_minutes: number;
+};
+
+export type StudyTimeProps = {
+  // span:Span
+  // summaryData:SummaryItem[]
+  summaryData: {
+    name: string;
+    minutes: number;
+    // start_date: string;
+  }[];
+  handleBarStart: (index: number) => void;
+  selectedBar: number;
+};
+
+// export type TimeChartProps = {
+//   name: string,
+//   minutes: number
+// }
+
+export type SubjectSummaryItem = {
+  subject: string;
+  total_minutes: number;
+};
+
+export type StudyRaitoProps = {
+  totalTime: number;
+  subjectSummary: SubjectSummaryItem[];
+};
+
+export type RaitoChartProps = {
+  pieData:{
+    name:string;
+    raito:number;
+  }[]
+}
+    

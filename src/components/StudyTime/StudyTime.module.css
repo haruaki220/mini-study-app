@@ -1,0 +1,21 @@
+.head{
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding:0px 30px;
+  font-size:20px;
+  font-weight:500;
+}
+
+.select{
+  display:block;
+  width:70px;
+  height:35px;
+  font-size:18px;
+  font-weight:450;
+}
+
+.option{
+  font-size:13px;
+}

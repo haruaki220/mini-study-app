@@ -1,0 +1,27 @@
+.statsWrapper{
+  box-sizing:border-box;
+  background-color:#fff;
+  border-radius:15px;
+  width:94%;
+  max-width:400px;
+  border:1px solid #E5E7EB;
+  /* padding:15px; */
+  margin: 10px auto 75px auto;
+  padding: 10px 0;
+  position:relative;
+}
+
+.select{
+  display:block;
+  width:70px;
+  height:35px;
+  font-size:18px;
+  font-weight:450;
+  position:absolute;
+  top:18px;
+  right:20px;
+}
+
+.option{
+  font-size:13px;
+}

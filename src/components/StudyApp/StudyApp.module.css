@@ -11,6 +11,7 @@
   align-items:center;
   background-color:#fff;
   border-bottom:1px solid #E5E7EB;
+  z-index: 999;
 }
 
 .headerTitle{

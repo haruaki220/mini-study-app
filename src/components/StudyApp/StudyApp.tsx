@@ -5,11 +5,12 @@ import type { StudyRecord } from "../../types/study.ts";
 import Button from "../Button/Button.tsx";
 import StudyForm from "../StudyForm/StudyForm.tsx";
 import StudyList from "../StudyList/StudyList.tsx";
+import Stats from "../Stats/Stats.tsx";
 import styles from "./StudyApp.module.css";
 
 function StudyApp() {
   const [studyRecords, setStudyRecords] = useState<StudyRecord[]>([]);
-  const [location, setLocation] = useState<"studyForm" | "studyList">(
+  const [location, setLocation] = useState<"studyForm" | "studyList" | "stats">(
     "studyList",
   );
   const { session } = useAuth();
@@ -113,6 +114,9 @@ function StudyApp() {
         {location === "studyList" && (
           <p className={styles.headerTitle}>記録リスト</p>
         )}
+        {location === "stats" && (
+          <p className={styles.headerTitle}>統計データ</p>
+        )}
         <Button
           variant="danger"
           type="button"
@@ -132,6 +136,7 @@ function StudyApp() {
           updateRecord={updateRecord}
         />
       )}
+      {location === "stats" && <Stats />}
       <div className={styles.buttonNav}>
         {/* <button onClick={()=>setLocation("studyList")}>記録リスト</button> */}
         {/* <button onClick={()=>setLocation("studyForm")}>記録追加</button> */}
@@ -155,6 +160,17 @@ function StudyApp() {
           onClick={() => setLocation("studyForm")}
         >
           記録追加
+        </Button>
+
+        <Button
+          variant="nav"
+          type="button"
+          size="md"
+          disabled={false}
+          active={location === "stats"}
+          onClick={() => setLocation("stats")}
+        >
+          統計データ
         </Button>
       </div>
     </>
