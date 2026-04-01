@@ -1,19 +1,22 @@
 // import React, {PureComponent} from "react";
-import type { StudyTimeProps } from "../../types/study";
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  LabelList,
+  // Legend,
+  ResponsiveContainer,
   XAxis,
   YAxis,
-  LabelList,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Cell
 } from "recharts";
+import type { TimeChartProps } from "../../types/study";
 
-
-export default function TimeChart({summaryData, handleBarStart, selectedBar}:StudyTimeProps) {
+export default function TimeChart({
+  summaryData,
+  handleBarStart,
+  selectedBar,
+}: TimeChartProps) {
   return (
     <ResponsiveContainer width="100%" height={250}>
       <BarChart
@@ -30,14 +33,17 @@ export default function TimeChart({summaryData, handleBarStart, selectedBar}:Stu
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis domain={[0, "dataMax"]} />
-        <Legend align="center"/>
-        <Bar dataKey="minutes" onClick={(__,index) => handleBarStart(index)}>
-          {summaryData.map((__,index)=>(
-            <Cell key={`cell-${index}`} fill={index===selectedBar?"#8884d8" : "#bbb8f9ff"}/>
+        {/* <Legend align="center"/> */}
+        <Bar dataKey="minutes" onClick={(__, index) => handleBarStart(index)}>
+          {summaryData.map((__, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={index === selectedBar ? "#8884d8" : "#bbb8f9ff"}
+            />
           ))}
           <LabelList fill="#000000" />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
-  )
+  );
 }

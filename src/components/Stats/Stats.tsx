@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import type { Span } from "../../types/study.ts";
 import { useAuth } from "../../context/AuthContext.tsx";
 import type { SubjectSummaryItem, SummaryItem } from "../../types/study.ts";
-import StudyRaito from "../StudyRaito/StudyRaito.tsx";
+import StudyRatio from "../StudyRatio/StudyRatio.tsx";
 import StudyTime from "../StudyTime/StudyTime.tsx";
 import styles from "./Stats.module.css";
 
@@ -41,9 +41,9 @@ export default function Stats() {
       console.log(data);
     } else if (span === "1週間") {
       data = summaryData.map((d) => {
-        const dateObj = new Date(d.start_date);
+        // const dateObj = new Date(d.start_date);
         // console.log(date)
-        const end_date = new Date(dateObj);
+        const end_date = new Date(d.start_date);
         end_date.setDate(end_date.getDate() + 6);
         // console.log(end_date)
 
@@ -96,7 +96,9 @@ export default function Stats() {
     console.log(data);
     setSummaryData(data);
     // setSelectedBarStart(data[data.length - 1].start_date);
-    setSelectedBar(data.length - 1);
+    if(data.length>0){
+      setSelectedBar(data.length - 1);
+    }
   };
 
   useEffect(() => {
@@ -126,10 +128,14 @@ export default function Stats() {
       console.log(end_date);
     }
     const year = end_date.getFullYear();
-    const month = end_date.getMonth()+1<10? "0" + (end_date.getMonth() + 1) : end_date.getMonth();
-    const date = end_date.getDate() < 10? "0" + end_date.getDate() : end_date.getDate();
-    const arrangedEnd=year + "-" + month + "-" + date;
-    console.log(arrangedEnd)
+    const month =
+      end_date.getMonth() + 1 < 10
+        ? "0" + (end_date.getMonth() + 1)
+        : end_date.getMonth() + 1;
+    const date =
+      end_date.getDate() < 10 ? "0" + end_date.getDate() : end_date.getDate();
+    const arrangedEnd = year + "-" + month + "-" + date;
+    console.log(arrangedEnd);
     return arrangedEnd;
   };
 
@@ -150,8 +156,8 @@ export default function Stats() {
 
   useEffect(() => {
     fetchSubjectSummary();
-  }, [summaryData,selectedBar]);
-  console.log(selectedBar)
+  }, [summaryData, selectedBar]);
+  console.log(selectedBar);
   return (
     <div className={styles.statsWrapper}>
       <select
@@ -171,7 +177,7 @@ export default function Stats() {
         selectedBar={selectedBar}
       />
       {summaryData.length > 0 && (
-        <StudyRaito
+        <StudyRatio
           totalTime={summaryData[selectedBar].total_minutes}
           subjectSummary={subjectSummary}
         />

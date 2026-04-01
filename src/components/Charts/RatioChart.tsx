@@ -1,6 +1,6 @@
 // import { PureComponent } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
-import type { RaitoChartProps } from "../../types/study";
+import type { RatioChartProps } from "../../types/study";
 
 // type CustomizedLabelProps = {
 //   cx: number; // 円の中心X
@@ -30,6 +30,7 @@ import type { RaitoChartProps } from "../../types/study";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;
+
 const customizedLabel = ({
   cx,
   cy,
@@ -51,7 +52,8 @@ const customizedLabel = ({
       fill="#f3f3f3ff"
       textAnchor={x > cx ? "start" : "middle"}
       dominantBaseline="central"
-      fontSize={18}
+      fontSize={19}
+      fontWeight={480}
     >
       {`${name}`}
       {/* ${(percent * 100).toFixed(0)}% */}
@@ -61,19 +63,19 @@ const customizedLabel = ({
 
 type pieDataItem = {
   name: string;
-  raito: number;
+  ratio: number;
 };
 
-export default function RaitoChart({ pieData }: RaitoChartProps) {
+export default function RatioChart({ pieData }: RatioChartProps) {
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={330}>
       <PieChart width={500} height={500}>
         <Pie
           data={pieData}
-          dataKey="raito"
+          dataKey="ratio"
           cx="50%"
           cy="50%"
-          outerRadius={110}
+          outerRadius={120}
           fill="#8884d8"
           label={customizedLabel}
           labelLine={false}
@@ -88,11 +90,11 @@ export default function RaitoChart({ pieData }: RaitoChartProps) {
         <Legend
           formatter={(value, entry) => {
             const payload = entry.payload as pieDataItem;
-            const raito = payload
-              ? Math.floor(payload.raito * 100 * 10) / 10
+            const ratio = payload
+              ? Math.floor(payload.ratio * 100 * 10) / 10
               : 0;
 
-            return `${value}:${raito}%`;
+            return `${value}:${ratio}%`;
           }}
           align="center"
           // verticalAlign="middle"

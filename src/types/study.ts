@@ -78,6 +78,18 @@ export type StudyTimeProps = {
   selectedBar: number;
 };
 
+export type TimeChartProps = {
+  // span:Span
+  // summaryData:SummaryItem[]
+  summaryData: {
+    name: string;
+    minutes: number;
+    // start_date: string;
+  }[];
+  handleBarStart: (index: number) => void;
+  selectedBar: number;
+};
+
 // export type TimeChartProps = {
 //   name: string,
 //   minutes: number
@@ -88,15 +100,14 @@ export type SubjectSummaryItem = {
   total_minutes: number;
 };
 
-export type StudyRaitoProps = {
+export type StudyRatioProps = {
   totalTime: number;
   subjectSummary: SubjectSummaryItem[];
 };
 
-export type RaitoChartProps = {
-  pieData:{
-    name:string;
-    raito:number;
-  }[]
-}
-    
+export type RatioChartProps = {
+  pieData: {
+    name: string;
+    ratio: number;
+  }[];
+};
