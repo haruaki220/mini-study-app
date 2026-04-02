@@ -10,8 +10,8 @@ export const fetchSummary = async (
       headers: { Authorization: `Bearer ${token}` },
     },
   );
-  if(!response.ok){
-    throw new Error(`サーバーからの応答が異常です: ${response.status}`)
+  if (!response.ok) {
+    throw new Error(`サーバーからの応答が異常です: ${response.status}`);
   }
   const data = await response.json();
 
@@ -29,10 +29,10 @@ export const fetchSubjectSummary = async (
       headers: { Authorization: `Bearer ${token}` },
     },
   );
-  if(!response.ok){
-    throw new Error(`サーバーからの応答が異常です: ${response.status}`)
+  if (!response.ok) {
+    throw new Error(`サーバーからの応答が異常です: ${response.status}`);
   }
   const data = await response.json();
-  
+
   return data;
 };

@@ -14,13 +14,6 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
       <div className={styles.form}>
         <div className={styles.row}>
           <p className={styles.label}>教科</p>
-          {/* <input
-            id="subject"
-            className={styles.inputArea}
-            type="text"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-          /> */}
           <Input
             tag="input"
             type="text"
@@ -34,24 +27,6 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
           <p className={styles.label}>時間</p>
 
           <div className={styles.inputMin}>
-            {/* <input
-              id="minutes"
-              className={`${styles.inputArea} ${styles.minutes}`}
-              type="number"
-              min={0}
-              value={minutes}
-              onChange={(e) => {
-                const v = e.target.value;
-
-                if (v === "") {
-                  setMinutes("");
-                  return;
-                }
-
-                const value = Number(e.target.value);
-                if (value >= 0) setMinutes(value);
-              }}
-            /> */}
             <Input
               tag="input"
               type="number"
@@ -76,14 +51,6 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
         </div>
         <div className={styles.row}>
           <p className={styles.label}>メモ</p>
-          {/* <textarea
-            placeholder="学習内容やメモを入力"
-            rows={5}
-            id="memo"
-            className={styles.inputArea}
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-          /> */}
           <Input
             tag="textarea"
             value={memo}
@@ -91,15 +58,7 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
             placeholder="学習内容やメモを入力"
             onChange={(e) => setMemo(e.target.value)}
           />
-          
         </div>
-        {/* <button
-          onClick={() => {
-            addRecord(subject, minutes, memo);
-          }}
-        >
-          記録を追加
-        </button> */}
       </div>
       <Button
         variant="primary"
@@ -112,33 +71,6 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
       >
         記録を追加
       </Button>
-      {/* <div>
-        <span>教科：</span>
-        <input value={subject} onChange={(e) => setSubject(e.target.value)} />
-      </div>
-      <div>
-        <span>時間：</span>
-        <input
-          type="number"
-          min={0}
-          value={minutes}
-          onChange={(e) => {
-            const v = e.target.value;
-
-            if (v === "") {
-              setMinutes("");
-              return;
-            }
-
-            const value = Number(e.target.value);
-            if (value >= 0) setMinutes(value);
-          }}
-        />
-      </div>
-      <div>
-        <span>メモ：</span>
-        <textarea value={memo} onChange={(e) => setMemo(e.target.value)} />
-      </div> */}
     </>
   );
 }

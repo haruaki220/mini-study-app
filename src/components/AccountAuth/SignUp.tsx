@@ -51,11 +51,6 @@ export default function Login({setMode}:AuthProps) {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <p className={styles.label}>メールアドレス</p>
-          {/* <input
-            type="email"
-            value={mailInput}
-            onChange={(e) => setMailInput(e.target.value)}
-          /> */}
           <Input
             tag="input"
             type="email"
@@ -67,11 +62,6 @@ export default function Login({setMode}:AuthProps) {
         </div>
         <div className={styles.row}>
           <p className={styles.label}>パスワード</p>
-          {/* <input
-            type="password"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-          /> */}
           <Input
             tag="input"
             type="password"
@@ -81,9 +71,6 @@ export default function Login({setMode}:AuthProps) {
             onChange={(e) => setPasswordInput(e.target.value)}
           />
         </div>
-        {/* <button type="submit" disabled={loading}>
-          {loading ? "サインアップ中" : "サインアップ"}
-        </button> */}
         <Button variant="primary" type="submit" size="lg" disabled={loading}>
           {loading ? "サインアップ中" : "サインアップ"}
         </Button>

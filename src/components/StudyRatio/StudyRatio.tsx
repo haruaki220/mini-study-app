@@ -8,13 +8,7 @@ export default function StudyRatio({
   totalTime,
   subjectSummary,
 }: StudyRatioProps) {
-  console.log(subjectSummary);
-  // const pieData = subjectSummary.map((s) => {
-  //   return {
-  //     name: s.subject,
-  //     ratio: s.total_minutes / totalTime,
-  //   };
-  // });
+  // console.log(subjectSummary);
   const pieData = toPieData(subjectSummary,totalTime)
   console.log(pieData);
   return (

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { supabase } from "../../lib/supabase.ts";
+import type { AuthProps } from "../../types/study.ts";
 import Button from "../Button/Button.tsx";
 import Input from "../Input/Input.tsx";
 import styles from "./AccountAuth.module.css";
-import type {AuthProps} from "../../types/study.ts";
 
-export default function Login({setMode}:AuthProps) {
+export default function Login({ setMode }: AuthProps) {
   const [mailInput, setMailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -44,13 +44,6 @@ export default function Login({setMode}:AuthProps) {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <p className={styles.label}>メールアドレス</p>
-          {/* <input
-            type="email"
-            className={styles.inputArea}
-            value={mailInput}
-            placeholder="メールアドレスを入力"
-            onChange={(e) => setMailInput(e.target.value)}
-          /> */}
           <Input
             tag="input"
             type="email"
@@ -62,13 +55,6 @@ export default function Login({setMode}:AuthProps) {
         </div>
         <div className={styles.row}>
           <p className={styles.label}>パスワード</p>
-          {/* <input
-            type="password"
-            className={styles.inputArea}
-            value={passwordInput}
-            placeholder="パスワードを入力"
-            onChange={(e) => setPasswordInput(e.target.value)}
-          /> */}
           <Input
             tag="input"
             type="password"
@@ -78,25 +64,22 @@ export default function Login({setMode}:AuthProps) {
             onChange={(e) => setPasswordInput(e.target.value)}
           />
         </div>
-        {/* <button type="submit" disabled={loading}>
-            {loading ? "ログイン中" : "ログイン"}
-          </button> */}
         <Button variant="primary" type="submit" size="lg" disabled={loading}>
           {loading ? "ログイン中" : "ログイン"}
         </Button>
         {error && <div>{error}</div>}
       </form>
-      
+
       <h4>アカウントをお持ちでない方はこちら</h4>
       <Button
-          variant="secondary"
-          type="button"
-          size="lg"
-          disabled={false}
-          onClick={setMode}
-        >
-          サインアップ
-        </Button>
+        variant="secondary"
+        type="button"
+        size="lg"
+        disabled={false}
+        onClick={setMode}
+      >
+        サインアップ
+      </Button>
     </>
   );
 }
