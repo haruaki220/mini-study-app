@@ -66,34 +66,22 @@ export type SummaryItem = {
   total_minutes: number;
 };
 
+export type formatSummaryItem = {
+  name: string;
+  minutes:number;
+}
+
 export type StudyTimeProps = {
-  // span:Span
-  // summaryData:SummaryItem[]
-  summaryData: {
-    name: string;
-    minutes: number;
-    // start_date: string;
-  }[];
+  summaryData: formatSummaryItem[];
   handleBarStart: (index: number) => void;
   selectedBar: number;
 };
 
 export type TimeChartProps = {
-  // span:Span
-  // summaryData:SummaryItem[]
-  summaryData: {
-    name: string;
-    minutes: number;
-    // start_date: string;
-  }[];
+  summaryData: formatSummaryItem[];
   handleBarStart: (index: number) => void;
   selectedBar: number;
 };
-
-// export type TimeChartProps = {
-//   name: string,
-//   minutes: number
-// }
 
 export type SubjectSummaryItem = {
   subject: string;
@@ -111,3 +99,18 @@ export type RatioChartProps = {
     ratio: number;
   }[];
 };
+
+//Span型とその元となる配列
+// export const spans = ["1日", "1週間", "1か月", "1年"] as const;
+// export type Span = (typeof spans)[number];
+
+export const spanList = {
+  "1日": "day",
+  "1週間": "week",
+  "1か月": "month",
+  "1年": "year",
+} as const;
+export type Span = keyof typeof spanList;
+export type SpanKey =  (typeof spanList)[Span];
+
+export const spans = Object.keys(spanList) as Span[];

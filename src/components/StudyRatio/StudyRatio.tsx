@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import type { StudyRatioProps } from "../../types/study.ts";
+import { toPieData } from "../../utils/toPieData.ts";
 import RatioChart from "../Charts/RatioChart.tsx";
 import styles from "./StudyRatio.module.css";
 
@@ -8,12 +9,13 @@ export default function StudyRatio({
   subjectSummary,
 }: StudyRatioProps) {
   console.log(subjectSummary);
-  const pieData = subjectSummary.map((s) => {
-    return {
-      name: s.subject,
-      ratio: s.total_minutes / totalTime,
-    };
-  });
+  // const pieData = subjectSummary.map((s) => {
+  //   return {
+  //     name: s.subject,
+  //     ratio: s.total_minutes / totalTime,
+  //   };
+  // });
+  const pieData = toPieData(subjectSummary,totalTime)
   console.log(pieData);
   return (
     <>
