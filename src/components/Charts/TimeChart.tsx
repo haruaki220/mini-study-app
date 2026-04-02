@@ -41,7 +41,7 @@ export default function TimeChart({
               fill={index === selectedBar ? "#8884d8" : "#bbb8f9ff"}
             />
           ))}
-          <LabelList fill="#000000" />
+          <LabelList fill="#000000" style={{ pointerEvents: "none" }} />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
