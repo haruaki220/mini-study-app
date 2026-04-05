@@ -1,4 +1,4 @@
-import type { SpanKey, StudyRecord } from "../types/study";
+import type { SpanKey } from "../types/study";
 
 export const fetchSummary = async (
   spanKey: SpanKey,

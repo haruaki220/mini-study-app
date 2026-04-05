@@ -1,12 +1,3 @@
-.listWrapper {
-  width: 100%;
-  flex-grow: 1;
-  margin-bottom: 65px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .studyList {
   display: flex;
   flex-direction: column;
