@@ -5,7 +5,6 @@ import { AuthProvider, useAuth } from "./context/AuthContext.tsx";
 
 function AppContent() {
   const { session, loading } = useAuth();
-  console.log(session);
   if (loading) {
     return <p className="loading">loading...</p>;
   }

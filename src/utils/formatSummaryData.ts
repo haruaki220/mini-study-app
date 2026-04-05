@@ -7,7 +7,6 @@ export const formatSummaryData = (summaryData: SummaryItem[], span: Span) => {
       name: d.start_date.slice(5).replaceAll("-", "/"),
       minutes: d.total_minutes,
     }));
-    console.log(data);
   } else if (span === "1週間") {
     data = summaryData.map((d) => {
       const end_date = new Date(d.start_date);
@@ -25,19 +24,16 @@ export const formatSummaryData = (summaryData: SummaryItem[], span: Span) => {
         minutes: d.total_minutes,
       };
     });
-    console.log(data);
   } else if (span === "1か月") {
     data = summaryData.map((d) => ({
       name: d.start_date.slice(5, 7),
       minutes: d.total_minutes,
     }));
-    console.log(data);
   } else if (span === "1年") {
     data = summaryData.map((d) => ({
       name: d.start_date.slice(0, 4),
       minutes: d.total_minutes,
     }));
-    console.log(data);
   }
   return data;
 };

@@ -64,6 +64,7 @@ export default function Auth() {
     setMessage("");
     setMailInput("");
     setPasswordInput("");
+    setShowPassword("text");
   };
 
   return (

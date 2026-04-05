@@ -40,7 +40,6 @@ const customizedLabel = ({
   // percent,
   name,
 }: any) => {
-  // console.log(midAngle);
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -52,7 +51,7 @@ const customizedLabel = ({
       fill="#f3f3f3ff"
       textAnchor={x > cx ? "start" : "middle"}
       dominantBaseline="central"
-      fontSize={19}
+      fontSize={17}
       fontWeight={480}
     >
       {`${name}`}

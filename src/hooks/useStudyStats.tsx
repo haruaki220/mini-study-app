@@ -54,7 +54,6 @@ export function useStudyStats(token: string | undefined) {
       const start_date = summaryData[selectedBar].start_date;
       const end_date = getEndDate(start_date, span);
       const data = await fetchSubjectSummary(start_date, end_date, token);
-      console.log(data);
       setSubjectSummary(data);
     } catch (e) {
       if (e instanceof Error) {
@@ -69,7 +68,6 @@ export function useStudyStats(token: string | undefined) {
     if (!token) return;
     getSubjectSummary();
   }, [span, summaryData, selectedBar, token]);
-  console.log(selectedBar);
 
   return {
     span,

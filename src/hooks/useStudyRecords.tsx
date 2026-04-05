@@ -8,13 +8,14 @@ export function useStudyRecords(token: string | undefined) {
     "studyList",
   );
   const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getRecords = async () => {
     if (!token) return;
     try {
+      setIsLoading(true);
       setError("");
       const data = await fetchRecords(token);
-      console.log(data);
       setStudyRecords(data);
     } catch (e) {
       if (e instanceof Error) {
@@ -22,6 +23,8 @@ export function useStudyRecords(token: string | undefined) {
       } else {
         setError("予期しないエラーが発生しました");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -86,8 +89,8 @@ export function useStudyRecords(token: string | undefined) {
 
   return {
     studyRecords,
-    setStudyRecords,
     location,
+    isLoading,
     setLocation,
     error,
     setError,

@@ -17,13 +17,7 @@ import styles from "./Stats.module.css";
 export default function Stats() {
   const { session } = useAuth();
   const token = session?.access_token;
-  // const [span, setSpan] = useState<Span>("1日");
-  // const [summaryData, setSummaryData] = useState<SummaryItem[]>([]);
-  // const [selectedBar, setSelectedBar] = useState<number>(0);
-  // const [subjectSummary, setSubjectSummary] = useState<SubjectSummaryItem[]>(
-  //   [],
-  // );
-  // const [error, setError] = useState<string>("");
+
   const {
     span,
     setSpan,
@@ -35,59 +29,12 @@ export default function Stats() {
     isLoading,
   } = useStudyStats(token);
 
-  // API用にspanを変換
-  // const spanKey: SpanKey = spanList[span];
-
-  // const getSummaryData = async () => {
-  //   try {
-  //     if (!token) throw new Error("未認証です");
-  //     const data = await fetchSummary(spanKey, token);
-  //     setSummaryData(data);
-  //     if (data.length > 0) {
-  //       setSelectedBar(data.length - 1);
-  //     }
-  //   } catch (e) {
-  //     if (e instanceof Error) {
-  //       setError(e.message);
-  //     } else {
-  //       setError("予期しないエラーが発生しました");
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (!token) return;
-  //   getSummaryData();
-  // }, [span, token]);
-
-  // const getSubjectSummary = async () => {
-  //   if (summaryData.length === 0) return;
-  //   try {
-  //     const start_date = summaryData[selectedBar].start_date;
-  //     const end_date = getEndDate(start_date, span);
-  //     const data = await fetchSubjectSummary(start_date, end_date, token);
-  //     console.log(data);
-  //     setSubjectSummary(data);
-  //   } catch (e) {
-  //     if (e instanceof Error) {
-  //       setError(e.message);
-  //     } else {
-  //       setError("予期しないエラーが発生しました");
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getSubjectSummary();
-  // }, [span, summaryData, selectedBar, token]);
-  // console.log(selectedBar);
-
   return (
     <>
       <div className={styles.stats}>
         {isLoading ? (
           <p className="loading">loading...</p>
-        ) : (
+        ) : summaryData.length > 0 ? (
           <>
             <select
               className={styles.select}
@@ -115,6 +62,8 @@ export default function Stats() {
             )}
             {error && <div>{error}</div>}
           </>
+        ) : (
+          <p className={styles.message}>記録がありません</p>
         )}
       </div>
     </>

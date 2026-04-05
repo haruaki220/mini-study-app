@@ -12,9 +12,7 @@ export default function StudyRatio({
   startDate,
   span,
 }: StudyRatioProps) {
-  // console.log(subjectSummary);
   const pieData = toPieData(subjectSummary, totalTime);
-  console.log(pieData);
   return (
     <>
       <div className="studyRatio">

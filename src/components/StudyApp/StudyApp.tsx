@@ -15,8 +15,10 @@ function StudyApp() {
   const {
     studyRecords,
     location,
+    isLoading,
     setLocation,
     error,
+    setError,
     addRecord,
     deleteRecord,
     updateRecord,
@@ -61,6 +63,7 @@ function StudyApp() {
                 studyRecords={studyRecords}
                 deleteRecord={deleteRecord}
                 updateRecord={updateRecord}
+                isLoading={isLoading}
               />
             )}
             {location === "stats" && <Stats />}
@@ -75,7 +78,10 @@ function StudyApp() {
           size="md"
           disabled={false}
           active={location === "studyList"}
-          onClick={() => setLocation("studyList")}
+          onClick={() => {
+            setLocation("studyList")
+            setError("");
+          }}
         >
           記録リスト
         </Button>
@@ -86,7 +92,10 @@ function StudyApp() {
           size="md"
           disabled={false}
           active={location === "studyForm"}
-          onClick={() => setLocation("studyForm")}
+          onClick={() => {
+            setLocation("studyForm")
+            setError("")
+          }}
         >
           記録追加
         </Button>
@@ -97,7 +106,10 @@ function StudyApp() {
           size="md"
           disabled={false}
           active={location === "stats"}
-          onClick={() => setLocation("stats")}
+          onClick={() => {
+            setLocation("stats")
+            setError("")
+          }}
         >
           統計データ
         </Button>

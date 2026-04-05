@@ -19,6 +19,7 @@ export type StudyListProps = {
     editMinutes: number | "",
     editMemo: string,
   ) => void;
+  isLoading:boolean;
 };
 
 export type StudyItemProps = {

@@ -48,7 +48,6 @@ export const fetchRecords = async (token: string | undefined) => {
     throw new Error(`サーバーからの応答が異常です: ${response.status}`);
   }
   const data = await response.json();
-  console.log(data);
   return data;
 };
 
@@ -57,7 +56,6 @@ export const postRecord = async (
   minutes: number | "",
   memo: string,
   token: string | undefined,
-  // setStudyRecords: React.Dispatch<React.SetStateAction<StudyRecord[]>>,
 ) => {
   if (!token) return;
   const response = await fetch("http://localhost:3000/api/study", {
@@ -76,15 +74,12 @@ export const postRecord = async (
   if (!response.ok) {
     throw new Error(`サーバーからの応答が異常です: ${response.status}`);
   }
-  const data = await response.json();
-  console.log(data);
-  // setStudyRecords(await fetchRecords(token));
+  // const data = await response.json();
 };
 
 export const removeRecord = async (
   id: string,
   token: string | undefined,
-  // setStudyRecords: React.Dispatch<React.SetStateAction<StudyRecord[]>>,
 ) => {
   if (!token) return;
   const response = await fetch(`http://localhost:3000/api/study/${id}`, {
@@ -94,9 +89,7 @@ export const removeRecord = async (
   if (!response.ok) {
     throw new Error(`サーバーからの応答が異常です: ${response.status}`);
   }
-  const data = await response.json();
-  console.log(data);
-  // setStudyRecords(await fetchRecords(token));
+  // const data = await response.json();
 };
 
 export const putRecord = async (
@@ -105,7 +98,6 @@ export const putRecord = async (
   editMinutes: number | "",
   editMemo: string,
   token: string | undefined,
-  // setStudyRecords: React.Dispatch<React.SetStateAction<StudyRecord[]>>,
 ) => {
   if (!token) return;
   const response = await fetch(`http://localhost:3000/api/study/${id}`, {
@@ -123,7 +115,5 @@ export const putRecord = async (
   if (!response.ok) {
     throw new Error(`サーバーからの応答が異常です: ${response.status}`);
   }
-  const data = await response.json();
-  console.log(data);
-  // setStudyRecords(await fetchRecords(token));
+  // const data = await response.json();
 };
