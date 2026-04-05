@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { StudyRecord } from "../types/study";
 import { fetchRecords, postRecord, putRecord, removeRecord } from "../api/api";
+import type { StudyRecord } from "../types/study";
 
-export function useStudyRecords (token:string|undefined) {
+export function useStudyRecords(token: string | undefined) {
   const [studyRecords, setStudyRecords] = useState<StudyRecord[]>([]);
   const [location, setLocation] = useState<"studyForm" | "studyList" | "stats">(
     "studyList",
@@ -11,21 +11,18 @@ export function useStudyRecords (token:string|undefined) {
 
   const getRecords = async () => {
     if (!token) return;
-    try{
-      setError("")
+    try {
+      setError("");
       const data = await fetchRecords(token);
       console.log(data);
       setStudyRecords(data);
-    }
-    catch(e){
-      if(e instanceof Error){
-        setError(e.message)
-      }
-      else{
-        setError("予期しないエラーが発生しました")
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError("予期しないエラーが発生しました");
       }
     }
-    
   };
 
   useEffect(() => {
@@ -39,33 +36,32 @@ export function useStudyRecords (token:string|undefined) {
   ) => {
     if (!subject.trim()) return;
     if (minutes === "") return;
-    try{
+    try {
       setError("");
-      await postRecord(subject, minutes, memo, token );
-      setStudyRecords(await fetchRecords (token));
-    } catch(e) {
-      if(e instanceof Error){
+      await postRecord(subject, minutes, memo, token);
+      setStudyRecords(await fetchRecords(token));
+    } catch (e) {
+      if (e instanceof Error) {
         setError(e.message);
-      }
-      else {
-        setError("予期しないエラーが発生しました")
+      } else {
+        setError("予期しないエラーが発生しました");
       }
     }
-  }
+  };
 
   const deleteRecord = async (id: string) => {
-    try{
+    try {
       setError("");
       await removeRecord(id, token);
       setStudyRecords(await fetchRecords(token));
-    } catch(e) {
-      if(e instanceof Error){
+    } catch (e) {
+      if (e instanceof Error) {
         setError(e.message);
       } else {
-        setError("予期しないエラーが発生しました")
+        setError("予期しないエラーが発生しました");
       }
     }
-  }
+  };
 
   const updateRecord = async (
     id: string,
@@ -75,19 +71,28 @@ export function useStudyRecords (token:string|undefined) {
   ) => {
     if (!editSubject.trim()) return;
     if (editMinutes === "") return;
-    try{
+    try {
       setError("");
       await putRecord(id, editSubject, editMinutes, editMemo, token);
       setStudyRecords(await fetchRecords(token));
-    } catch(e) {
-      if(e instanceof Error){
+    } catch (e) {
+      if (e instanceof Error) {
         setError(e.message);
-      } else{
-        setError("予期しないエラーが発生しました")
+      } else {
+        setError("予期しないエラーが発生しました");
       }
     }
-  }
+  };
 
-
-  return {studyRecords, setStudyRecords, location, setLocation, error, setError, addRecord, deleteRecord, updateRecord}
+  return {
+    studyRecords,
+    setStudyRecords,
+    location,
+    setLocation,
+    error,
+    setError,
+    addRecord,
+    deleteRecord,
+    updateRecord,
+  };
 }

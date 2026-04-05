@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { supabase } from "../../lib/supabase.ts";
+import type { AuthProps } from "../../types/study.ts";
 import Button from "../Button/Button.tsx";
 import Input from "../Input/Input.tsx";
 import styles from "./AccountAuth.module.css";
-import type {AuthProps} from "../../types/study.ts";
 
-export default function Login({setMode}:AuthProps) {
+export default function SignUp({ setMode }: AuthProps) {
   const [mailInput, setMailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,11 +27,10 @@ export default function Login({setMode}:AuthProps) {
         email: mailInput,
         password: passwordInput,
       });
-      console.log(data);
 
       if (error) {
         setError("メールアドレスまたはパスワードが違います");
-        return;
+        // return;
       }
 
       if (data.session === null) {
@@ -75,18 +74,18 @@ export default function Login({setMode}:AuthProps) {
           {loading ? "サインアップ中" : "サインアップ"}
         </Button>
         {message && <div>{message}</div>}
-      {error && <div>{error}</div>}
+        {error && <div>{error}</div>}
       </form>
       <h4>すでにアカウントをお持ちの方はこちら</h4>
       <Button
-          variant="secondary"
-          type="button"
-          size="lg"
-          disabled={false}
-          onClick={setMode}
-        >
-          ログイン
-        </Button>
+        variant="secondary"
+        type="button"
+        size="lg"
+        disabled={false}
+        onClick={setMode}
+      >
+        ログイン
+      </Button>
     </>
   );
 }
