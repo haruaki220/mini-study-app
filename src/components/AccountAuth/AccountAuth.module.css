@@ -1,8 +1,8 @@
 .welcome {
   font-size: 30px;
   width: 220px;
-  margin: 0 auto;
-  padding: 60px 0 20px 0;
+  margin: 60px auto 20px auto;
+  /* padding: 60px 0 20px 0; */
   color: #1f2937;
 }
 

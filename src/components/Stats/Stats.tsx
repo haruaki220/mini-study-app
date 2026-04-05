@@ -84,35 +84,39 @@ export default function Stats() {
 
   return (
     <>
-      {isLoading ? (
-        <p className="loading">loading...</p>
-      ) : (
-        <div className={styles.statsWrapper}>
-          <select
-            className={styles.select}
-            value={span}
-            onChange={(e) => setSpan(e.target.value as Span)}
-          >
-            {spans.map((s, index) => (
-              <option key={index} className={styles.option} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-          <StudyTime
-            summaryData={formatSummaryData(summaryData, span)}
-            handleBarStart={setSelectedBar}
-            selectedBar={selectedBar}
-          />
-          {summaryData.length > 0 && (
-            <StudyRatio
-              totalTime={summaryData[selectedBar].total_minutes}
-              subjectSummary={subjectSummary}
+      <div className={styles.stats}>
+        {isLoading ? (
+          <p className="loading">loading...</p>
+        ) : (
+          <>
+            <select
+              className={styles.select}
+              value={span}
+              onChange={(e) => setSpan(e.target.value as Span)}
+            >
+              {spans.map((s, index) => (
+                <option key={index} className={styles.option} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+            <StudyTime
+              summaryData={formatSummaryData(summaryData, span)}
+              handleBarStart={setSelectedBar}
+              selectedBar={selectedBar}
             />
-          )}
-          {error && <div>{error}</div>}
-        </div>
-      )}
+            {summaryData.length > 0 && (
+              <StudyRatio
+                totalTime={summaryData[selectedBar].total_minutes}
+                subjectSummary={subjectSummary}
+                startDate={summaryData[selectedBar].start_date}
+                span={span}
+              />
+            )}
+            {error && <div>{error}</div>}
+          </>
+        )}
+      </div>
     </>
   );
 }

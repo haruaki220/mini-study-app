@@ -68,8 +68,8 @@ export type SummaryItem = {
 
 export type formatSummaryItem = {
   name: string;
-  minutes:number;
-}
+  minutes: number;
+};
 
 export type StudyTimeProps = {
   summaryData: formatSummaryItem[];
@@ -91,6 +91,8 @@ export type SubjectSummaryItem = {
 export type StudyRatioProps = {
   totalTime: number;
   subjectSummary: SubjectSummaryItem[];
+  startDate: string;
+  span: Span;
 };
 
 export type RatioChartProps = {
@@ -111,6 +113,6 @@ export const spanList = {
   "1年": "year",
 } as const;
 export type Span = keyof typeof spanList;
-export type SpanKey =  (typeof spanList)[Span];
+export type SpanKey = (typeof spanList)[Span];
 
 export const spans = Object.keys(spanList) as Span[];

@@ -13,7 +13,9 @@ export function useStudyStats(token: string | undefined) {
   const [span, setSpan] = useState<Span>("1日");
   const [summaryData, setSummaryData] = useState<SummaryItem[]>([]);
   const [selectedBar, setSelectedBar] = useState<number>(0);
-  const [subjectSummary, setSubjectSummary] = useState<SubjectSummaryItem[]>([]);
+  const [subjectSummary, setSubjectSummary] = useState<SubjectSummaryItem[]>(
+    [],
+  );
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -21,7 +23,7 @@ export function useStudyStats(token: string | undefined) {
 
   const getSummaryData = async () => {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
       setError("");
       const data = await fetchSummary(spanKey, token);
       setSummaryData(data);
@@ -48,7 +50,7 @@ export function useStudyStats(token: string | undefined) {
     if (summaryData.length === 0) return;
     try {
       setError("");
-      if(!summaryData[selectedBar]) return;
+      if (!summaryData[selectedBar]) return;
       const start_date = summaryData[selectedBar].start_date;
       const end_date = getEndDate(start_date, span);
       const data = await fetchSubjectSummary(start_date, end_date, token);
@@ -64,7 +66,7 @@ export function useStudyStats(token: string | undefined) {
   };
 
   useEffect(() => {
-    if(!token) return;
+    if (!token) return;
     getSubjectSummary();
   }, [span, summaryData, selectedBar, token]);
   console.log(selectedBar);

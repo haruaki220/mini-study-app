@@ -59,18 +59,20 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
             onChange={(e) => setMemo(e.target.value)}
           />
         </div>
+        <div className={styles.buttonArea}>
+          <Button
+            variant="primary"
+            type="button"
+            size="lg"
+            disabled={false}
+            onClick={() => {
+              addRecord(subject, minutes, memo);
+            }}
+          >
+            記録を追加
+          </Button>
+        </div>
       </div>
-      <Button
-        variant="primary"
-        type="button"
-        size="lg"
-        disabled={false}
-        onClick={() => {
-          addRecord(subject, minutes, memo);
-        }}
-      >
-        記録を追加
-      </Button>
     </>
   );
 }
