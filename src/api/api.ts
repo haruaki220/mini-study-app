@@ -6,7 +6,7 @@ export const fetchSummary = async (
 ) => {
   if (!token) return;
   const response = await fetch(
-    `http://localhost:3000/api/study/summary?span=${spanKey}`,
+    `/api/study/summary?span=${spanKey}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -26,7 +26,7 @@ export const fetchSubjectSummary = async (
 ) => {
   if (!token) return;
   const response = await fetch(
-    `http://localhost:3000/api/study/subject_summary?start_date=${start_date}&end_date=${end_date}`,
+    `/api/study/subject_summary?start_date=${start_date}&end_date=${end_date}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -41,7 +41,7 @@ export const fetchSubjectSummary = async (
 
 export const fetchRecords = async (token: string | undefined) => {
   if (!token) return [];
-  const response = await fetch("http://localhost:3000/api/study", {
+  const response = await fetch("/api/study", {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) {
@@ -58,7 +58,7 @@ export const postRecord = async (
   token: string | undefined,
 ) => {
   if (!token) return;
-  const response = await fetch("http://localhost:3000/api/study", {
+  const response = await fetch("/api/study", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export const removeRecord = async (
   token: string | undefined,
 ) => {
   if (!token) return;
-  const response = await fetch(`http://localhost:3000/api/study/${id}`, {
+  const response = await fetch(`/api/study/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -100,7 +100,7 @@ export const putRecord = async (
   token: string | undefined,
 ) => {
   if (!token) return;
-  const response = await fetch(`http://localhost:3000/api/study/${id}`, {
+  const response = await fetch(`/api/study/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
