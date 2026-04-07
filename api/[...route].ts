@@ -5,7 +5,7 @@ import { cors } from "hono/cors";
 import { createSupabaseClient } from "./supabaseClient.js";
 import type { Env } from "./types.js";
 
-const app = new Hono<Env>().basePath("/api");
+const app = new Hono<Env>();
 
 app.use("*", cors());
 
