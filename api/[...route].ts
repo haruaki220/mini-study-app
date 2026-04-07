@@ -2,7 +2,7 @@
 import "dotenv/config";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { createSupabaseClient } from "./supabaseClient.js";
+import { createSupabaseClient } from "./supabaseClient";
 import type { Env } from "./types.js";
 
 const app = new Hono<Env>();
