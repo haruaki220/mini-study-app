@@ -20,7 +20,7 @@ const createSupabaseClient = (accessToken: string) => {
   );
 };
 
-const app = new Hono<Env>();
+const app = new Hono<Env>().basePath("/api");
 
 app.use("*", cors());
 
