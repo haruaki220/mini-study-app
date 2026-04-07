@@ -2,8 +2,23 @@
 import "dotenv/config";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { createSupabaseClient } from "./supabaseClient.js";
-import type { Env } from "./types.js";
+// import { createSupabaseClient } from "./supabaseClient.ts";
+import type { Env } from "./types.ts";
+import { createClient } from "@supabase/supabase-js";
+
+const createSupabaseClient = (accessToken: string) => {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
+    {
+      global: {
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      },
+    },
+  );
+};
 
 const app = new Hono<Env>();
 
