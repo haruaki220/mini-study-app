@@ -5,7 +5,7 @@ import { cors } from "hono/cors";
 // import { createSupabaseClient } from "./supabaseClient.ts";
 import type { Env } from "./types.ts";
 import { createClient } from "@supabase/supabase-js";
-import { handle } from "hono/vercel";
+// import { handle } from "hono/vercel";
 
 const createSupabaseClient = (accessToken: string) => {
   return createClient(
@@ -156,11 +156,11 @@ app.put("/study/:id", async (c) => {
   return c.json(data);
 });
 
-export default handle(app);
+// export default handle(app);
 
-// export default app;
+export default app;
 
-// export const GET = app.fetch;
-// export const POST = app.fetch;
-// export const PUT = app.fetch;
-// export const DELETE = app.fetch;
+export const GET = app.fetch;
+export const POST = app.fetch;
+export const PUT = app.fetch;
+export const DELETE = app.fetch;
