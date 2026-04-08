@@ -1,4 +1,5 @@
 import type { SpanKey } from "../types/study";
+const API_BASE_URL = import.meta.env.VITE_API_URL
 
 export const fetchSummary = async (
   spanKey: SpanKey,
@@ -6,7 +7,7 @@ export const fetchSummary = async (
 ) => {
   if (!token) return;
   const response = await fetch(
-    `/api/study/summary?span=${spanKey}`,
+    `${API_BASE_URL}/api/study/summary?span=${spanKey}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -26,7 +27,7 @@ export const fetchSubjectSummary = async (
 ) => {
   if (!token) return;
   const response = await fetch(
-    `/api/study/subject_summary?start_date=${start_date}&end_date=${end_date}`,
+    `${API_BASE_URL}/api/study/subject_summary?start_date=${start_date}&end_date=${end_date}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     },
@@ -41,7 +42,7 @@ export const fetchSubjectSummary = async (
 
 export const fetchRecords = async (token: string | undefined) => {
   if (!token) return [];
-  const response = await fetch("/api/study", {
+  const response = await fetch(`${API_BASE_URL}/api/study`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) {
@@ -58,7 +59,7 @@ export const postRecord = async (
   token: string | undefined,
 ) => {
   if (!token) return;
-  const response = await fetch("/api/study", {
+  const response = await fetch(`${API_BASE_URL}/api/study`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +83,7 @@ export const removeRecord = async (
   token: string | undefined,
 ) => {
   if (!token) return;
-  const response = await fetch(`/api/study/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/study/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -100,7 +101,7 @@ export const putRecord = async (
   token: string | undefined,
 ) => {
   if (!token) return;
-  const response = await fetch(`/api/study/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api/study/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
