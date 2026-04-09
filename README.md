@@ -1,77 +1,54 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# Mini-Study-App(front-end)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 概要
+学習時間を記録・グラフで可視化するwebアプリです。  
+自分がよくだらだら勉強してしまうのを直したくて作成しました。
 
-Currently, two official plugins are available:
+## 主な機能
+- 学習記録追加
+- 一覧表示
+- グラフ表示
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## デモ
+https://mini-study-app.vercel.app
 
-## React Compiler
+## 使用技術
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Typescript
+- Vite
+- Recharts
 
-## Expanding the ESLint configuration
+## セットアップ
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+#### インストール
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+#### 開発サーバー起動
+npm run dev
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## バックエンドとの接続
+このアプリは以下のバックエンドAPIを使用しています
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Base URL: https://mini-study-backend.onrender.com
+
+## 環境変数
+ルートディレクトリに`.env`ファイルを作成し、以下の環境変数を設定して下さい
+```
+VITE_API_URL=https://mini-study-backend.onrender.com
+VITE_SUPABASE_URL=https://imhaozsadvuxbztsjwzk.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltaGFvenNhZHZ1eGJ6dHNqd3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNzI0NzksImV4cCI6MjA4Njc0ODQ3OX0.B1nDPOP7ZIpd0pC01XauiyntnW-G_Al5VAivt3DXhdQ
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+※ 本アプリはSupabase Authによる認証を前提としています。  
+※ 上記の設定を使用することで、そのまま動作確認が可能です。  
+※ Supabaseのanon keyはクライアントで使用することを前提としており、公開されても問題ありません（RLSで保護されています）。  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+自身でバックエンド・Supabaseを用意する場合は、環境変数を適宜変更してください。  
+バックエンドについては以下のリポジトリを参考にしてください  
+https://github.com/haruaki220/mini-study-backend
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-=======
-# mini-study-app
->>>>>>> f97374f723caab11911b5d16eaf4eda517d8c085
+## 今後の課題
+- UI改善
+- 統計データの表示方法改善
+- 目標機能の追加
