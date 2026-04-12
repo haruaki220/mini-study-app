@@ -1,6 +1,7 @@
 import type { ButtonProps } from "../../types/study.ts";
 import styles from "./Button.module.css";
 
+//アプリ全体で使用するボタンを共通化し再利用するためのコンポーネント（variantやsizeによってスタイルを切り替え）
 export default function Button({
   variant,
   type,
@@ -12,11 +13,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={
-        active
-          ? `${styles.button} ${styles[variant]} ${styles[size]} ${styles.active}`
-          : `${styles.button} ${styles[variant]} ${styles[size]}`
-      }
+      className={`${styles.button} ${styles[variant]} ${styles[size]} ${active ? styles.active : ""}`}
       type={type}
       disabled={disabled}
       onClick={onClick}

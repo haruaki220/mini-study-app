@@ -10,17 +10,20 @@ export default function Auth() {
   const [mode, setMode] = useState<"signup" | "login">("login");
   const [mailInput, setMailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false); //非同期の認証処理中trueとなり、ボタンをクリック不可にする
   const [error, setError] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [showPassword, setShowPassword] = useState<"text" | "password">(
     "password",
-  );
+  ); //パスワードをtextで表示・passwordで非表示
 
+  // supabaseのauthAPIで認証を行い、結果をUI（エラーやメッセージ）に反映する中核処理
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setMessage("");
+
+    //入力が空の場合APIを呼ばずエラー表示
     if (mailInput === "" || passwordInput === "") {
       setError("入力してください");
       return;
@@ -42,12 +45,15 @@ export default function Auth() {
 
       if (error) {
         setError(error.message);
+        return;
       }
 
+      //サインアップ時メール確認前はsessionが発行されないため、その場合は確認を促す
       if (mode === "signup" && data.session === null) {
         setMessage("確認メールを送信しました。メールを確認してください");
-      }
+      } 
     } catch (e) {
+      /*通信エラー等supabase以外で発生した例外を処理*/
       if (e instanceof Error) {
         setError(e.message);
       } else {
@@ -58,6 +64,7 @@ export default function Auth() {
     }
   };
 
+  //ログインとサインアップを切り替え、エラー・入力・表示状態をリセットする関数
   const switchMode = () => {
     setMode((prev) => (prev === "login" ? "signup" : "login"));
     setError("");
@@ -109,18 +116,24 @@ export default function Auth() {
               />
             </div>
           </div>
-          <Button variant="primary" type="submit" size="lg" disabled={loading}>
+
+          
+          <Button variant="primary" type="submit" size="lg" disabled={loading}> 
             {loading ? "処理中..." : mode === "login" ? "ログイン" : "新規登録"}
           </Button>
           {message && <div>{message}</div>}
           {error && <div>{error}</div>}
         </form>
-        <h4>すでにアカウントをお持ちの方はこちら</h4>
+        <h4>
+          {mode === "login"
+            ? "アカウントをお持ちでない方はこちら"
+            : "すでにアカウントをお持ちの方はこちら"}
+        </h4>
         <Button
           variant="secondary"
           type="button"
           size="lg"
-          disabled={false}
+          disabled={loading}
           onClick={switchMode}
         >
           {mode === "login" ? "新規登録" : "ログイン"}
