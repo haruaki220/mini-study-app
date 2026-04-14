@@ -19,7 +19,7 @@ export type StudyListProps = {
     editMinutes: number | "",
     editMemo: string,
   ) => void;
-  isLoading:boolean;
+  isLoading: boolean;
 };
 
 export type StudyItemProps = {
@@ -36,6 +36,8 @@ export type StudyItemProps = {
 export type AuthProps = {
   setMode: () => void;
 };
+
+export type Location = "studyForm" | "studyList" | "stats";
 
 export type ButtonProps = {
   variant: "primary" | "secondary" | "danger" | "ghost" | "nav";
@@ -74,13 +76,13 @@ export type formatSummaryItem = {
 
 export type StudyTimeProps = {
   summaryData: formatSummaryItem[];
-  handleBarStart: (index: number) => void;
+  setSelectedBar: (index: number) => void;
   selectedBar: number;
 };
 
 export type TimeChartProps = {
   summaryData: formatSummaryItem[];
-  handleBarStart: (index: number) => void;
+  setSelectedBar: (index: number) => void;
   selectedBar: number;
 };
 
@@ -92,8 +94,7 @@ export type SubjectSummaryItem = {
 export type StudyRatioProps = {
   totalTime: number;
   subjectSummary: SubjectSummaryItem[];
-  startDate: string;
-  span: Span;
+  selectedSpan: string;
 };
 
 export type RatioChartProps = {
@@ -103,17 +104,13 @@ export type RatioChartProps = {
   }[];
 };
 
-//Span型とその元となる配列
-// export const spans = ["1日", "1週間", "1か月", "1年"] as const;
-// export type Span = (typeof spans)[number];
-
 export const spanList = {
   "1日": "day",
   "1週間": "week",
   "1か月": "month",
   "1年": "year",
-} as const;
-export type Span = keyof typeof spanList;
-export type SpanKey = (typeof spanList)[Span];
+} as const; //UIとバックエンドのspan対応表
+export type Span = keyof typeof spanList; //spanListのkeyをもとにした型
+export type SpanKey = (typeof spanList)[Span]; //spanListのvalueをもとにした型
 
-export const spans = Object.keys(spanList) as Span[];
+export const spans = Object.keys(spanList) as Span[]; //optionタグの値に使用する配列
