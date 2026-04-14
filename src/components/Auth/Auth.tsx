@@ -15,7 +15,7 @@ export default function Auth() {
   const [message, setMessage] = useState<string>("");
   const [showPassword, setShowPassword] = useState<"text" | "password">(
     "password",
-  ); //パスワードをtextで表示・passwordで非表示
+  ); //パスワード表示管理（textで表示・passwordで非表示）
 
   // supabaseのauthAPIで認証を行い、結果をUI（エラーやメッセージ）に反映する中核処理
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

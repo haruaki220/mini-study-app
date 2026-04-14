@@ -1,18 +1,12 @@
-// import { useEffect, useState } from "react";
-// import type { Span } from "../../types/study.ts";
-// import { fetchSubjectSummary, fetchSummary } from "../../api/api.ts";
 import { useAuth } from "../../context/AuthContext.tsx";
+import { useStudyStats } from "../../hooks/useStudyStats.tsx";
 import type { Span } from "../../types/study.ts";
 import { spans } from "../../types/study.ts";
-// import { getEndDate } from "../../utils/getEndDate.ts";
-import { useStudyStats } from "../../hooks/useStudyStats.tsx";
+import { formatSpan } from "../../utils/formatSpan.ts";
 import { formatSummaryData } from "../../utils/formatSummaryData.ts";
 import StudyRatio from "../StudyRatio/StudyRatio.tsx";
 import StudyTime from "../StudyTime/StudyTime.tsx";
 import styles from "./Stats.module.css";
-
-// const spans = ["1日", "1週間", "1か月", "1年"] as const;
-// export type Span = (typeof spans)[number];
 
 export default function Stats() {
   const { session } = useAuth();
@@ -24,7 +18,7 @@ export default function Stats() {
     summaryData,
     subjectSummary,
     error,
-    selectedBar,
+    selectedBar, //棒グラフの選択状態と連動したインデックス
     setSelectedBar,
     isLoading,
   } = useStudyStats(token);
@@ -34,8 +28,9 @@ export default function Stats() {
       <div className={styles.stats}>
         {isLoading ? (
           <p className="loading">loading...</p>
-        ) : summaryData.length > 0 ? (
+        ) : summaryData.length > 0 ? ( //学習時間の集計データがある場合のみ統計UIを表示し、未記録時はメッセージを表示
           <>
+            {/* 集計単位（週、月など）を指定するセレクトボックス */}
             <select
               className={styles.select}
               value={span}
@@ -47,19 +42,23 @@ export default function Stats() {
                 </option>
               ))}
             </select>
+
             <StudyTime
-              summaryData={formatSummaryData(summaryData, span)}
-              handleBarStart={setSelectedBar}
+              summaryData={formatSummaryData(summaryData, span)} //rechartsで扱う形式にデータを整形
+              setSelectedBar={setSelectedBar}
               selectedBar={selectedBar}
             />
-            {summaryData.length > 0 && (
+            {summaryData[selectedBar] && (
               <StudyRatio
-                totalTime={summaryData[selectedBar].total_minutes}
+                totalTime={summaryData[selectedBar].total_minutes} //選択中の期間の合計学習時間
                 subjectSummary={subjectSummary}
-                startDate={summaryData[selectedBar].start_date}
-                span={span}
+                selectedSpan={formatSpan(
+                  summaryData[selectedBar].start_date, //選択中の期間の開始日
+                  span,
+                )}
               />
             )}
+
             {error && <div>{error}</div>}
           </>
         ) : (
