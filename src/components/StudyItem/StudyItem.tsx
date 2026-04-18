@@ -12,7 +12,7 @@ export default function StudyItem({
 }: StudyItemProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editSubject, setEditSubject] = useState<string>("");
-  const [editMinutes, setEditMinutes] = useState<number | "">(0);
+  const [editMinutes, setEditMinutes] = useState<number | "">(0); // number型の入力だが、未入力状態に対応するため空文字も許可
   const [editMemo, setEditMemo] = useState<string>("");
 
   return (
@@ -44,6 +44,7 @@ export default function StudyItem({
               min={0}
               value={editMinutes}
               onChange={(e) => {
+                // 数値入力を制御（空文字を許可しつつ、0以上の数値のみ反映）
                 const v = e.target.value;
 
                 if (v === "") {
@@ -78,7 +79,7 @@ export default function StudyItem({
               onClick={() => {
                 updateRecord(record.id, editSubject, editMinutes, editMemo);
                 setIsEditing(false);
-              }}
+              }} // 編集内容を保存し、表示モードに戻す
             >
               保存
             </Button>
@@ -87,7 +88,7 @@ export default function StudyItem({
               type="button"
               size="sm"
               disabled={false}
-              onClick={() => setIsEditing(false)}
+              onClick={() => setIsEditing(false)} //編集内容をキャンセルして表示モードに戻す
             >
               取り消し
             </Button>
@@ -108,7 +109,7 @@ export default function StudyItem({
                   setEditSubject(record.subject);
                   setEditMinutes(record.minutes);
                   setEditMemo(record.memo);
-                }}
+                }} //編集モードに変え、現在の値を編集用stateにコピー
               >
                 編集
               </Button>
@@ -117,14 +118,14 @@ export default function StudyItem({
                 type="button"
                 size="sm"
                 disabled={false}
-                onClick={() => deleteRecord(record.id)}
+                onClick={() => deleteRecord(record.id)} //記録を削除
               >
                 削除
               </Button>
             </div>
           </div>
           <div className={`${styles.row} ${styles.row2}`}>
-            <p>{formatCreatedAt(record.created_at)}</p>
+            <p>{formatCreatedAt(record.created_at)}</p> {/* created_atをYYYY//MM/DD形式に変換したものを表示 */}
             <p className={styles.minutes}>{record.minutes}分</p>
           </div>
           <div className={`${styles.row} ${styles.row3}`}>

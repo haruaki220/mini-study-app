@@ -6,7 +6,7 @@ import styles from "./StudyForm.module.css";
 
 export default function StudyForm({ addRecord }: StudyFormProps) {
   const [subject, setSubject] = useState<string>("");
-  const [minutes, setMinutes] = useState<number | "">("");
+  const [minutes, setMinutes] = useState<number | "">(""); // number型の入力だが、未入力状態に対応するため空文字も許可
   const [memo, setMemo] = useState<string>("");
 
   return (
@@ -35,6 +35,7 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
               min={0}
               placeholder="例： 30"
               onChange={(e) => {
+                // 数値入力を制御（空文字を許可しつつ、0以上の数値のみ反映）
                 const v = e.target.value;
 
                 if (v === "") {
@@ -66,7 +67,7 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
             size="lg"
             disabled={false}
             onClick={() => {
-              addRecord(subject, minutes, memo);
+              addRecord(subject, minutes, memo); // 入力内容を親コンポーネントに渡して記録を追加
             }}
           >
             記録を追加
