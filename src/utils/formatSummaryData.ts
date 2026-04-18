@@ -1,39 +1,52 @@
-import type { formatSummaryItem, Span, SummaryItem } from "../types/study.ts";
+import type { FormatSummaryItem, Span, SummaryItem } from "../types/study.ts";
 
+//学習時間の集計データを棒グラフ表示用に変換
 export const formatSummaryData = (summaryData: SummaryItem[], span: Span) => {
-  let data: formatSummaryItem[] = [];
+  let formattedData: FormatSummaryItem[] = []; //フォーマットしたデータを入れる配列
   if (span === "1日") {
-    data = summaryData.map((d) => ({
-      name: d.start_date.slice(5).replaceAll("-", "/"),
-      minutes: d.total_minutes,
-    }));
-  } else if (span === "1週間") {
-    data = summaryData.map((d) => {
-      const end_date = new Date(d.start_date);
-      end_date.setDate(end_date.getDate() + 6);
-
-      const month =
-        end_date.getMonth() + 1 < 10
-          ? "0" + (end_date.getMonth() + 1)
-          : end_date.getMonth() + 1;
-      const date =
-        end_date.getDate() < 10 ? "0" + end_date.getDate() : end_date.getDate();
+    formattedData = summaryData.map((d) => {
+      const date = new Date(d.start_date); //処理用日付オブジェクト
       return {
         name:
-          d.start_date.slice(5).replaceAll("-", "/") + "-" + month + "/" + date,
+          String(date.getMonth() + 1).padStart(2, "0") +
+          "/" +
+          String(date.getDate()).padStart(2, "0"), //MM/DDに変換
+        minutes: d.total_minutes,
+      };
+    });
+  } else if (span === "1週間") {
+    formattedData = summaryData.map((d) => {
+      const date = new Date(d.start_date); //処理用日付オブジェクト
+      const start_date =
+        String(date.getMonth() + 1).padStart(2, "0") +
+        "/" +
+        String(date.getDate()).padStart(2, "0"); //MM/DDに変換
+      date.setDate(date.getDate() + 6); //開始日の6日後（終了日）に設定
+      const end_date =
+        String(date.getMonth() + 1).padStart(2, "0") +
+        "/" +
+        String(date.getDate()).padStart(2, "0"); //MM/DDに変換
+      return {
+        name: start_date + "-" + end_date, //MM/DD-MM/DDに変換
         minutes: d.total_minutes,
       };
     });
   } else if (span === "1か月") {
-    data = summaryData.map((d) => ({
-      name: d.start_date.slice(5, 7),
-      minutes: d.total_minutes,
-    }));
+    formattedData = summaryData.map((d) => {
+      const date = new Date(d.start_date); //処理用日付オブジェクト
+      return {
+        name: String(date.getMonth() + 1).padStart(2, "0"), //MMに変換
+        minutes: d.total_minutes,
+      };
+    });
   } else if (span === "1年") {
-    data = summaryData.map((d) => ({
-      name: d.start_date.slice(0, 4),
-      minutes: d.total_minutes,
-    }));
+    formattedData = summaryData.map((d) => {
+      const date = new Date(d.start_date); //処理用日付オブジェクト
+      return {
+        name: String(date.getFullYear()), //YYYYに変換
+        minutes: d.total_minutes,
+      };
+    });
   }
-  return data;
+  return formattedData;
 };
