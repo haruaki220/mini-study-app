@@ -27,24 +27,20 @@ export type StudyItemProps = {
   deleteRecord: (id: string) => void;
   updateRecord: (
     id: string,
-    editedSubject: string,
+    editSubject: string,
     editMinutes: number | "",
     editMemo: string,
   ) => void;
-};
-
-export type AuthProps = {
-  setMode: () => void;
 };
 
 export type Location = "studyForm" | "studyList" | "stats";
 
 export type ButtonProps = {
   variant: "primary" | "secondary" | "danger" | "ghost" | "nav";
-  type: "button" | "submit" | "reset" | undefined;
+  type?: "button" | "submit" | "reset";
   size: "sm" | "md" | "lg";
   disabled: boolean;
-  children: string;
+  children: React.ReactNode;
   active?: boolean;
   onClick?: () => void;
 };
@@ -59,8 +55,8 @@ export type InputProps = {
   min?: number;
   onChange: (
     e:
-      | React.ChangeEvent<HTMLInputElement, HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
 };
 
@@ -69,19 +65,19 @@ export type SummaryItem = {
   total_minutes: number;
 };
 
-export type formatSummaryItem = {
+export type FormatSummaryItem = {
   name: string;
   minutes: number;
 };
 
 export type StudyTimeProps = {
-  summaryData: formatSummaryItem[];
+  summaryData: FormatSummaryItem[];
   setSelectedBar: (index: number) => void;
   selectedBar: number;
 };
 
 export type TimeChartProps = {
-  summaryData: formatSummaryItem[];
+  summaryData: FormatSummaryItem[];
   setSelectedBar: (index: number) => void;
   selectedBar: number;
 };
@@ -109,8 +105,8 @@ export const spanList = {
   "1週間": "week",
   "1か月": "month",
   "1年": "year",
-} as const; //UIとバックエンドのspan対応表
-export type Span = keyof typeof spanList; //spanListのkeyをもとにした型
-export type SpanKey = (typeof spanList)[Span]; //spanListのvalueをもとにした型
+} as const; //UI表示用の期間（日本語）とAPI用キーのspan対応表
+export type Span = keyof typeof spanList; //UIで使用する期間の型
+export type SpanKey = (typeof spanList)[Span]; //APIリクエストで使用する期間パラメータの型
 
-export const spans = Object.keys(spanList) as Span[]; //optionタグの値に使用する配列
+export const spans = Object.keys(spanList) as Span[]; //セレクトボックス用の期間リスト

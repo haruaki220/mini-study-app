@@ -4,7 +4,7 @@ import styles from "./StudyTime.module.css";
 
 export default function StudyTime({
   summaryData,
-  handleBarStart,
+  setSelectedBar,
   selectedBar,
 }: StudyTimeProps) {
   return (
@@ -15,7 +15,7 @@ export default function StudyTime({
         </div>
         <TimeChart
           summaryData={summaryData}
-          handleBarStart={handleBarStart}
+          setSelectedBar={setSelectedBar}
           selectedBar={selectedBar}
         />
       </div>
