@@ -44,7 +44,7 @@ export function useStudyStats(token: string | undefined) {
   }, [span, token]);
 
   // 選択している期間の教科別学習時間の統計を取得しstateに反映
-  con getSubjectSummary = async () => {
+  const getSubjectSummary = async () => {
     if (summaryData.length === 0) return; // 元となるデータが存在しない場合の対処
     if (!summaryData[selectedBar]) return; // 選択中のデータが存在しない場合の対処
     try {

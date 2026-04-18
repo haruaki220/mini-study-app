@@ -33,10 +33,10 @@ function StudyApp() {
   };
 
   //クリックされたナビボタンに応じた画面遷移と遷移時のエラーリセット処理
-  const navClick = (next:Location) => {
-    setLocation(next)
+  const navClick = (next: Location) => {
+    setLocation(next);
     setError("");
-  }
+  };
 
   return (
     <>
@@ -66,7 +66,7 @@ function StudyApp() {
           <p className={styles.error}>{error}</p>
         ) : (
           <>
-          {/* locationに応じて表示画面を切り替え */}
+            {/* locationに応じて表示画面を切り替え */}
             {location === "studyForm" && <StudyForm addRecord={addRecord} />}
             {location === "studyList" && (
               <StudyList
@@ -88,7 +88,7 @@ function StudyApp() {
           size="md"
           disabled={false}
           active={location === "studyList"}
-          onClick={()=>navClick("studyList")}
+          onClick={() => navClick("studyList")}
         >
           記録リスト
         </Button>
@@ -99,7 +99,7 @@ function StudyApp() {
           size="md"
           disabled={false}
           active={location === "studyForm"}
-          onClick={()=>navClick("studyForm")}
+          onClick={() => navClick("studyForm")}
         >
           記録追加
         </Button>
@@ -110,7 +110,7 @@ function StudyApp() {
           size="md"
           disabled={false}
           active={location === "stats"}
-          onClick={()=>navClick("stats")}
+          onClick={() => navClick("stats")}
         >
           統計データ
         </Button>
