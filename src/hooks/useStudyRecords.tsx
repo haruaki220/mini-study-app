@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchRecords, postRecord, putRecord, removeRecord } from "../api/api";
-import type { StudyRecord } from "../types/study";
+import type { Location, StudyRecord } from "../types/study";
 
 export function useStudyRecords(token: string | undefined) {
   const [studyRecords, setStudyRecords] = useState<StudyRecord[]>([]); //学習記録を管理する状態
-  const [location, setLocation] = useState<"studyForm" | "studyList" | "stats">(
+  const [location, setLocation] = useState<Location>(
     "studyList",
   ); //表示する画面を管理する状態
   const [error, setError] = useState<string>("");
