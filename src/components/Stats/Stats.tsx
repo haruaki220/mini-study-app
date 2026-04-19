@@ -20,13 +20,13 @@ export default function Stats() {
     error,
     selectedBar, //棒グラフの選択状態と連動したインデックス
     setSelectedBar,
-    isLoading,
+    loading,
   } = useStudyStats(token);
 
   return (
     <>
       <div className={styles.stats}>
-        {isLoading ? (
+        {loading ? (
           <p className="loading">loading...</p>
         ) : summaryData.length > 0 ? ( //学習時間の集計データがある場合のみ統計UIを表示し、未記録時はメッセージを表示
           <>

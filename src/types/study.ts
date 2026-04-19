@@ -8,6 +8,7 @@ export type StudyRecord = {
 
 export type StudyFormProps = {
   addRecord: (subject: string, minutes: number | "", memo: string) => void;
+  error: string;
 };
 
 export type StudyListProps = {
@@ -19,7 +20,8 @@ export type StudyListProps = {
     editMinutes: number | "",
     editMemo: string,
   ) => void;
-  isLoading: boolean;
+  loading: boolean;
+  error: string;
 };
 
 export type StudyItemProps = {

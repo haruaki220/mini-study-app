@@ -9,14 +9,13 @@ import StudyList from "../StudyList/StudyList.tsx";
 import styles from "./StudyApp.module.css";
 
 function StudyApp() {
-
   const { session } = useAuth();
   const token = session?.access_token;
 
   const {
     studyRecords,
     location, //表示中の画面を管理する状態
-    isLoading,
+    loading,
     setLocation,
     error,
     setError,
@@ -62,23 +61,24 @@ function StudyApp() {
         </Button>
       </div>
       <div className={styles.mainContainer}>
-        {error ? (
+        {/* {error ? (
           <p className={styles.error}>{error}</p>
-        ) : (
+        ) : ( */}
           <>
             {/* locationに応じて表示画面を切り替え */}
-            {location === "studyForm" && <StudyForm addRecord={addRecord} />}
+            {location === "studyForm" && <StudyForm addRecord={addRecord} error={error} />}
             {location === "studyList" && (
               <StudyList
                 studyRecords={studyRecords}
                 deleteRecord={deleteRecord}
                 updateRecord={updateRecord}
-                isLoading={isLoading}
+                loading={loading}
+                error={error}
               />
             )}
             {location === "stats" && <Stats />}
           </>
-        )}
+        {/* )} */}
       </div>
 
       <div className={styles.buttonNav}>

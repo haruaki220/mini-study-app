@@ -6,11 +6,17 @@ export default function StudyList({
   studyRecords,
   deleteRecord,
   updateRecord,
-  isLoading,
+  loading,
+  error,
 }: StudyListProps) {
+  const alertError = (message: string) => {
+    window.alert(message);
+  };
+
   return (
     <>
-      {isLoading ? (
+      {error && alertError(error)}
+      {loading ? (
         <p className={styles.message}>loading...</p>
       ) : studyRecords.length === 0 ? (
         <p className={styles.message}>記録がありません</p>

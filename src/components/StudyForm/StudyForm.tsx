@@ -4,7 +4,7 @@ import Button from "../Button/Button.tsx";
 import Input from "../Input/Input.tsx";
 import styles from "./StudyForm.module.css";
 
-export default function StudyForm({ addRecord }: StudyFormProps) {
+export default function StudyForm({ addRecord, error }: StudyFormProps) {
   const [subject, setSubject] = useState<string>("");
   const [minutes, setMinutes] = useState<number | "">(""); // number型の入力だが、未入力状態に対応するため空文字も許可
   const [memo, setMemo] = useState<string>("");
@@ -72,6 +72,7 @@ export default function StudyForm({ addRecord }: StudyFormProps) {
           >
             記録を追加
           </Button>
+          {error && <p>{error}</p>}
         </div>
       </div>
     </>

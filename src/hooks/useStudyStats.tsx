@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchSubjectSummary, fetchSummary } from "../api/api.ts";
-import { getEndDate } from "../utils/getEndDate.ts";
 import type { Span, SubjectSummaryItem, SummaryItem } from "../types/study.ts";
 import { spanList } from "../types/study.ts";
+import { getEndDate } from "../utils/getEndDate.ts";
 
 export function useStudyStats(token: string | undefined) {
   const [span, setSpan] = useState<Span>("1日"); //統計表示の単位（日,週,月,年）
@@ -12,14 +12,14 @@ export function useStudyStats(token: string | undefined) {
     [],
   ); //円グラフ表示用の教科別学習時間の集計データ
   const [error, setError] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const spanKey = spanList[span]; //spanをバックエンド用に変換
 
   // 指定した期間単位で学習時間の集計データを取得し、結果をstateに反映
   const getSummaryData = async () => {
     try {
-      setIsLoading(true);
+      setLoading(true);
       setError("");
       if (!token) throw new Error("未認証です");
       const data = await fetchSummary(spanKey, token);
@@ -35,7 +35,7 @@ export function useStudyStats(token: string | undefined) {
         setError("予期しないエラーが発生しました");
       }
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -75,6 +75,6 @@ export function useStudyStats(token: string | undefined) {
     error,
     selectedBar,
     setSelectedBar,
-    isLoading,
+    loading,
   };
 }
