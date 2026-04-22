@@ -1,3 +1,7 @@
+/* .studyTime {
+  min-height:
+} */
+
 .head {
   height: 50px;
   display: flex;
@@ -7,7 +11,7 @@
   font-size: 20px;
   font-weight: 500;
 }
-
+/* 
 .select {
   display: block;
   width: 70px;
@@ -18,4 +22,9 @@
 
 .option {
   font-size: 13px;
+} */
+
+.message {
+  line-height: 250px;
+  font-size: 20px;
 }

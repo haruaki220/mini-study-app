@@ -11,16 +11,18 @@ export function useStudyStats(token: string | undefined) {
   const [subjectSummary, setSubjectSummary] = useState<SubjectSummaryItem[]>(
     [],
   ); //円グラフ表示用の教科別学習時間の集計データ
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
+  const [barError, setBarError] = useState<string>("");
+  const [pieError, setPieError] = useState<string>("");
+  const [barLoading, setBarLoading] = useState<boolean>(true);
+  const [pieLoading, setPieLoading] = useState<boolean>(false);
 
   const spanKey = spanList[span]; //spanをバックエンド用に変換
 
   // 指定した期間単位で学習時間の集計データを取得し、結果をstateに反映
   const getSummaryData = async () => {
     try {
-      setLoading(true);
-      setError("");
+      setBarLoading(true);
+      setBarError("");
       if (!token) throw new Error("未認証です");
       const data = await fetchSummary(spanKey, token);
       setSummaryData(data);
@@ -30,12 +32,12 @@ export function useStudyStats(token: string | undefined) {
       }
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        setBarError(e.message);
       } else {
-        setError("予期しないエラーが発生しました");
+        setBarError("予期しないエラーが発生しました");
       }
     } finally {
-      setLoading(false);
+      setBarLoading(false);
     }
   };
 
@@ -45,10 +47,18 @@ export function useStudyStats(token: string | undefined) {
 
   // 選択している期間の教科別学習時間の統計を取得しstateに反映
   const getSubjectSummary = async () => {
-    if (summaryData.length === 0) return; // 元となるデータが存在しない場合の対処
-    if (!summaryData[selectedBar]) return; // 選択中のデータが存在しない場合の対処
+    if (summaryData.length === 0) {
+      setSubjectSummary([]); // summaryDataに合わせて空配列にセット
+      setPieLoading(false);
+      return;
+    } // 元となるデータが存在しない場合の対処
+    if (!summaryData[selectedBar]) {
+      setPieLoading(false);
+      return; // 選択中のデータが存在しない場合の対処
+    }
     try {
-      setError("");
+      setPieLoading(true);
+      setPieError("");
       if (!token) throw new Error("未認証です");
       const start_date = summaryData[selectedBar].start_date;
       const end_date = getEndDate(start_date, span);
@@ -56,10 +66,12 @@ export function useStudyStats(token: string | undefined) {
       setSubjectSummary(data);
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        setPieError(e.message);
       } else {
-        setError("予期しないエラーが発生しました");
+        setPieError("予期しないエラーが発生しました");
       }
+    } finally {
+      setPieLoading(false);
     }
   };
 
@@ -72,9 +84,11 @@ export function useStudyStats(token: string | undefined) {
     setSpan,
     summaryData,
     subjectSummary,
-    error,
+    barError,
+    pieError,
     selectedBar,
     setSelectedBar,
-    loading,
+    barLoading,
+    pieLoading,
   };
 }

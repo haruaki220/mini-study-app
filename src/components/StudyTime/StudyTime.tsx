@@ -6,18 +6,27 @@ export default function StudyTime({
   summaryData,
   setSelectedBar,
   selectedBar,
+  // barLoading,
+  // barError,
 }: StudyTimeProps) {
   return (
     <>
       <div className="studyTime">
-        <div className={styles.head}>
+        {/* <div className={styles.head}>
           <p>学習時間（分）</p>
-        </div>
-        <TimeChart
-          summaryData={summaryData}
-          setSelectedBar={setSelectedBar}
-          selectedBar={selectedBar}
-        />
+        </div> */}
+
+        {/* {barLoading ? (
+          <div className={styles.message}>loading...</div>
+        ) : barError ? (
+          <div className={styles.message}>{barError}</div>
+        ) : ( */}
+          <TimeChart
+            summaryData={summaryData}
+            setSelectedBar={setSelectedBar}
+            selectedBar={selectedBar}
+          />
+        {/* )} */}
       </div>
     </>
   );
