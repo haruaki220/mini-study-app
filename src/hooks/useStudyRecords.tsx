@@ -101,6 +101,7 @@ export function useStudyRecords(token: string | undefined) {
     setLocation,
     error,
     setError,
+    getRecords,
     addRecord,
     deleteRecord,
     updateRecord,

@@ -19,6 +19,7 @@ function StudyApp() {
     setLocation,
     error,
     setError,
+    getRecords,
     addRecord,
     deleteRecord,
     updateRecord,
@@ -88,7 +89,10 @@ function StudyApp() {
           size="md"
           disabled={false}
           active={location === "studyList"}
-          onClick={() => navClick("studyList")}
+          onClick={() => {
+            navClick("studyList");
+            getRecords();
+          }}
         >
           記録リスト
         </Button>

@@ -56,32 +56,12 @@ export default function Stats() {
             summaryData={formatSummaryData(summaryData, span)} //rechartsで扱う形式にデータを整形
             setSelectedBar={setSelectedBar}
             selectedBar={selectedBar}
-            // barLoading={barLoading}
-            // barError={barError}
           />
         )}
-        {/*
-        {barLoading ? (
-          <p className={styles.barLoading}>loading...</p>
-        ) : summaryData.length > 0 ? ( //学習時間の集計データがある場合のみ統計UIを表示し、未記録時はメッセージを表示
-          <>
 
-            <StudyTime
-              summaryData={formatSummaryData(summaryData, span)} //rechartsで扱う形式にデータを整形
-              setSelectedBar={setSelectedBar}
-              selectedBar={selectedBar}
-              barLoading={barLoading}
-              barError={barError}
-            />
-
-          </>
-        ) : (
-          <p className={styles.message}>記録がありません</p>
-        )}
-*/}
         <div className={styles.head}>教科ごとの割合</div>
 
-        {barLoading || pieLoading ? (
+        {barLoading || pieLoading ? ( //棒グラフのloading中円グラフは未確定
           <div className={styles.pieMessage}>loading...</div>
         ) : pieError ? (
           <div className={styles.pieMessage}>{pieError}</div>
@@ -96,31 +76,9 @@ export default function Stats() {
                 summaryData[selectedBar].start_date, //選択中の期間の開始日
                 span,
               )}
-              // pieLoading={pieLoading}
-              // pieError={pieError}
             />
           )
         )}
-
-        {/* {pieLoading ? (
-          <p className={styles.pieLoading}>loading...</p>
-        ) : (
-          <>
-            {summaryData[selectedBar] && (
-              <StudyRatio
-                totalTime={summaryData[selectedBar].total_minutes} //選択中の期間の合計学習時間
-                subjectSummary={subjectSummary}
-                selectedSpan={formatSpan(
-                  summaryData[selectedBar].start_date, //選択中の期間の開始日
-                  span,
-                )}
-                pieLoading={pieLoading}
-                pieError={pieError}
-              />
-            )}
-            pieError && <div>{pieError}</div>} 
-          </>
-        )} */}
       </div>
     </>
   );
