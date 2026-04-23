@@ -1,6 +1,6 @@
 import type { StudyTimeProps } from "../../types/study.ts";
 import TimeChart from "../Charts/TimeChart.tsx";
-import styles from "./StudyTime.module.css";
+// import styles from "./StudyTime.module.css";
 
 export default function StudyTime({
   summaryData,
