@@ -1,3 +1,6 @@
+import barChart from "../../assets/barChart.png";
+import list from "../../assets/list.png";
+import plus from "../../assets/plus.png";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { useStudyRecords } from "../../hooks/useStudyRecords.tsx";
 import { supabase } from "../../lib/supabase.ts";
@@ -65,20 +68,22 @@ function StudyApp() {
         {/* {error ? (
           <p className={styles.error}>{error}</p>
         ) : ( */}
-          <>
-            {/* locationに応じて表示画面を切り替え */}
-            {location === "studyForm" && <StudyForm addRecord={addRecord} error={error} />}
-            {location === "studyList" && (
-              <StudyList
-                studyRecords={studyRecords}
-                deleteRecord={deleteRecord}
-                updateRecord={updateRecord}
-                loading={loading}
-                error={error}
-              />
-            )}
-            {location === "stats" && <Stats />}
-          </>
+        <>
+          {/* locationに応じて表示画面を切り替え */}
+          {location === "studyForm" && (
+            <StudyForm addRecord={addRecord} error={error} />
+          )}
+          {location === "studyList" && (
+            <StudyList
+              studyRecords={studyRecords}
+              deleteRecord={deleteRecord}
+              updateRecord={updateRecord}
+              loading={loading}
+              error={error}
+            />
+          )}
+          {location === "stats" && <Stats />}
+        </>
         {/* )} */}
       </div>
 
@@ -94,7 +99,8 @@ function StudyApp() {
             getRecords();
           }}
         >
-          記録リスト
+          <img src={list} alt="icon" width={28} />
+          <p>記録リスト</p>
         </Button>
 
         <Button
@@ -105,7 +111,8 @@ function StudyApp() {
           active={location === "studyForm"}
           onClick={() => navClick("studyForm")}
         >
-          記録追加
+          <img src={plus} alt="icon" width={28} />
+          <p>記録追加</p>
         </Button>
 
         <Button
@@ -116,7 +123,8 @@ function StudyApp() {
           active={location === "stats"}
           onClick={() => navClick("stats")}
         >
-          統計データ
+          <img src={barChart} alt="icon" width={28} />
+          <p>統計データ</p>
         </Button>
       </div>
     </>
