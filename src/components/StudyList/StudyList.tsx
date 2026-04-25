@@ -9,15 +9,12 @@ export default function StudyList({
   loading,
   error,
 }: StudyListProps) {
-  const alertError = (message: string) => {
-    window.alert(message);
-  };
-
   return (
     <>
-      {error && alertError(error)}
       {loading ? (
         <p className={styles.message}>loading...</p>
+      ) : error ? (
+        <p className={styles.message}>{error}</p>
       ) : studyRecords.length === 0 ? (
         <p className={styles.message}>記録がありません</p>
       ) : (

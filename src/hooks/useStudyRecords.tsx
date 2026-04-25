@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchRecords, postRecord, putRecord, removeRecord } from "../api/api";
+import { handleToast } from "../lib/toast";
 import type { Location, StudyRecord } from "../types/study";
 
 export function useStudyRecords(token: string | undefined) {
@@ -20,6 +21,7 @@ export function useStudyRecords(token: string | undefined) {
       setStudyRecords(data);
     } catch (e) {
       if (e instanceof Error) {
+        handleToast(e.message, "error");
         setError(e.message);
       } else {
         setError("予期しないエラーが発生しました");
@@ -42,15 +44,18 @@ export function useStudyRecords(token: string | undefined) {
     try {
       setError("");
       if (!token) throw new Error("未認証です");
-      if (!subject.trim()) throw new Error("教科を入力してください");
-      if (minutes === "") throw new Error("時間を入力してください");
+      if (!subject.trim()) throw new Error("教科が入力されていません");
+      if (minutes === "") throw new Error("時間が入力されていません");
       await postRecord(subject, minutes, memo, token);
+      handleToast("記録を追加しました", "success");
       await getRecords();
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        handleToast(e.message, "error");
+        // setError(e.message);
       } else {
-        setError("予期しないエラーが発生しました");
+        handleToast("予期しないエラーが発生しました", "error");
+        // setError("予期しないエラーが発生しました");
       }
     }
   };
@@ -61,12 +66,15 @@ export function useStudyRecords(token: string | undefined) {
       setError("");
       if (!token) throw new Error("未認証です");
       await removeRecord(id, token);
+      handleToast("記録を削除しました", "success");
       await getRecords();
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        handleToast(e.message, "error");
+        // setError(e.message);
       } else {
-        setError("予期しないエラーが発生しました");
+        handleToast("予期しないエラーが発生しました", "error");
+        // setError("予期しないエラーが発生しました");
       }
     }
   };
@@ -81,15 +89,18 @@ export function useStudyRecords(token: string | undefined) {
     try {
       setError("");
       if (!token) throw new Error("未認証です");
-      if (!editSubject.trim()) throw new Error("教科を入力してください");
-      if (editMinutes === "") throw new Error("時間を入力してください");
+      if (!editSubject.trim()) throw new Error("教科が入力されていません");
+      if (editMinutes === "") throw new Error("時間が入力されていません");
       await putRecord(id, editSubject, editMinutes, editMemo, token);
+      handleToast("編集を保存しました", "success");
       await getRecords();
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        handleToast(e.message, "error");
+        // setError(e.message);
       } else {
-        setError("予期しないエラーが発生しました");
+        handleToast("予期しないエラーが発生しました", "error");
+        // setError("予期しないエラーが発生しました");
       }
     }
   };

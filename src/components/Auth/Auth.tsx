@@ -2,6 +2,7 @@ import { useState } from "react";
 import eyeIcon from "../../assets/eyeIcon.png";
 import eyeSlashIcon from "../../assets/eyeSlashIcon.png";
 import { supabase } from "../../lib/supabase.ts";
+import { handleToast } from "../../lib/toast.ts";
 import Button from "../Button/Button.tsx";
 import Input from "../Input/Input.tsx";
 import styles from "./Auth.module.css";
@@ -25,7 +26,8 @@ export default function Auth() {
 
     //入力が空の場合APIを呼ばずエラー表示
     if (mailInput === "" || passwordInput === "") {
-      setError("入力してください");
+      handleToast("入力してください", "error");
+      // setError("入力してください");
       return;
     }
 
@@ -44,19 +46,23 @@ export default function Auth() {
             });
 
       if (error) {
+        handleToast(error.message, "error");
         setError(error.message);
         return;
       }
 
       //サインアップ時メール確認前はsessionが発行されないため、その場合は確認を促す
       if (mode === "signup" && data.session === null) {
+        handleToast("メールを送信しました", "success");
         setMessage("確認メールを送信しました。メールを確認してください");
-      } 
+      }
     } catch (e) {
       /*通信エラー等supabase以外で発生した例外を処理*/
       if (e instanceof Error) {
+        handleToast(e.message, "error");
         setError(e.message);
       } else {
+        handleToast("通信エラーが発生しました", "error");
         setError("通信エラーが発生しました");
       }
     } finally {
@@ -117,8 +123,7 @@ export default function Auth() {
             </div>
           </div>
 
-          
-          <Button variant="primary" type="submit" size="lg" disabled={loading}> 
+          <Button variant="primary" type="submit" size="lg" disabled={loading}>
             {loading ? "処理中..." : mode === "login" ? "ログイン" : "新規登録"}
           </Button>
           {message && <div>{message}</div>}
