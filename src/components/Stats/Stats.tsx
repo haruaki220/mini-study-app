@@ -49,7 +49,7 @@ export default function Stats() {
           <div className={styles.barMessage}>loading...</div>
         ) : barError ? (
           <div className={styles.barMessage}>{barError}</div>
-        ) : !(summaryData.length > 0) ? (
+        ) : summaryData.length === 0 ? (
           <p className={styles.barMessage}>記録がありません</p>
         ) : (
           <StudyTime
@@ -65,7 +65,7 @@ export default function Stats() {
           <div className={styles.pieMessage}>loading...</div>
         ) : pieError ? (
           <div className={styles.pieMessage}>{pieError}</div>
-        ) : !(summaryData.length > 0) ? (
+        ) : summaryData.length === 0 ? (
           <p className={styles.pieMessage}>記録がありません</p>
         ) : (
           summaryData[selectedBar] && (
